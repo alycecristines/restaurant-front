@@ -8,43 +8,6 @@
  *
 */
 
-/* Fontes do Habiens */
-@font-face {
-  font-family: 'Recita Heavy';
-  src: url('../fonts/Recita/Recita-Heavy.otf');
-}
-@font-face {
-  font-family: 'Recita Bold';
-  src: url('../fonts/Recita/Recita-Bold.otf');
-}
-@font-face {
-  font-family: 'Recita Book';
-  src: url('../fonts/Recita/Recita-Book.otf');
-}
-@font-face {
-  font-family: 'Recita Medium';
-  src: url('../fonts/Recita/Recita-Medium.otf');
-}
-@font-face {
-  font-family: 'Recita Light';
-  src: url('../fonts/Recita/Recita-Light.otf');
-}
-@font-face {
-  font-family: 'Basier Bold';
-  src: url('../fonts/Basier/BasierSquare-Bold.otf');
-}
-@font-face {
-  font-family: 'Basier Regular';
-  src: url('../fonts/Basier/BasierSquare-Regular.otf');
-}
-/* Fontes do Habiens */
-
-/* Icones do Habiens */
-@font-face {
-  font-family: 'HabiensIconFont';
-	src: url('../fonts/habiensicons.otf') format('opentype');
-}
-/* Icones do Habiens */
 @font-face {
   font-family: 'Glyphicons Halflings';
   src: url('../fonts/glyphicons-halflings-regular.eot');
@@ -65,104 +28,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-/* Icones do Habiens aproveitando o glyphicon */
-.hbi:before {
-  font-family: 'HabiensIconFont';
-  font-style: normal !important;
-}
-.hbi-acessible-female:before{
-  font-family: 'HabiensIconFont' !important;
-	content: 'a';
-}
-.hbi-acessible-male:before{
-  font-family: 'HabiensIconFont' !important;
-	content: 'b';
-}
-.hbi-arrow-down:before{
-  font-family: 'HabiensIconFont' !important;
-	content: 'c';
-}
-.hbi-arrow-left:before{
-  font-family: 'HabiensIconFont' !important;
-	content: 'd';
-}
-.hbi-arrow-right:before{
-  font-family: 'HabiensIconFont' !important;
-	content: 'e';
-}
-.hbi-arrow-up:before{
-  font-family: 'HabiensIconFont' !important;
-	content: 'f';
-}
-.hbi-broom:before{
-  font-family: 'HabiensIconFont' !important;
-	content: 'g';
-}
-.hbi-cart:before{
-  font-family: 'HabiensIconFont' !important;
-	content: 'h';
-}
-.hbi-cube:before{
-  font-family: 'HabiensIconFont' !important;
-	content: 'i';
-}
-.hbi-cup:before{
-  font-family: 'HabiensIconFont' !important;
-	content: 'j';
-}
-.hbi-folder:before{
-  font-family: 'HabiensIconFont' !important;
-	content: 'k';
-}
-.hbi-home:before{
-  font-family: 'HabiensIconFont' !important;
-	content: 'l';
-}
-.hbi-intersection:before{
-  font-family: 'HabiensIconFont' !important;
-	content: 'm';
-}
-.hbi-message:before{
-  font-family: 'HabiensIconFont' !important;
-	content: 'n';
-}
-.hbi-minus-circle:before{
-  font-family: 'HabiensIconFont' !important;
-	content: 'o';
-}
-.hbi-puzzle-piece:before{
-  font-family: 'HabiensIconFont' !important;
-	content: 'p';
-}
-.hbi-shop:before{
-  font-family: 'HabiensIconFont' !important;
-	content: 'q';
-}
-.hbi-shower:before{
-  font-family: 'HabiensIconFont' !important;
-	content: 'r';
-}
-.hbi-tag:before{
-  font-family: 'HabiensIconFont' !important;
-	content: 's';
-}
-.hbi-team:before{
-  font-family: 'HabiensIconFont' !important;
-	content: 't';
-}
-.hbi-user-female:before{
-  font-family: 'HabiensIconFont' !important;
-	content: 'u';
-}
-.hbi-user-l:before{
-  font-family: 'HabiensIconFont' !important;
-	content: 'v';
-}
-.hbi-user-male:before{
-  font-family: 'HabiensIconFont' !important;
-	content: 'w';
-}
-/* Icones do Habiens aproveitando o glyphicon */
+
 .glyphicon-asterisk:before {
   content: '\002a';
 }
@@ -1010,12 +876,12 @@ h5 {
   color: #444;
 }
 .nav > li.active > a {
-  color: #ffb900;
+  color: #ff8b3e;
   padding: 14px 20px 14px 21px;
 }
 .navbar-default .nav > li > a:hover,
 .navbar-default .nav > li > a:focus {
-  color: #ffb900;
+  color: #ff8b3e;
 }
 .nav .open > a,
 .nav .open > a:hover,
@@ -1162,7 +1028,7 @@ ul.nav-second-level {
   background: transparent;
 }
 .nav > li.active {
-  border-left: 4px solid #ffb900;
+  border-left: 4px solid #ff8b3e;
   background: transparent;
 }
 .nav.nav-second-level > li.active {
@@ -1261,7 +1127,7 @@ ul.nav-second-level {
 }
 .nav-second-level li a:hover,
 .nav-second-level li a:focus {
-  transition: all .2s ease-in-out;
+  transition: all 0.2s ease-in-out;
   transform: translateX(10px);
 }
 .fixed-sidebar.mini-navbar .nav-second-level.collapsing li a,
@@ -1301,7 +1167,7 @@ body.mini-navbar .navbar-default .nav > li > .nav-second-level li a {
   left: 70px;
   top: 0;
   background-color: #fff;
-  border-left: 4px solid #ffb900;
+  border-left: 4px solid #ff8b3e;
   box-shadow: 10px 0 20px -10px #ccc;
   padding: 10px 10px 10px 10px;
   font-size: 12px;
@@ -1671,7 +1537,7 @@ button:focus {
   background-color: #000;
   text-align: center;
   border-radius: 50%;
-  transition: all .5s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
 .menu-btn:hover,
 .menu-btn:focus {
@@ -1679,12 +1545,12 @@ button:focus {
   background-color: #222;
 }
 .menu-btn:active {
-  transform: scale(.8);
+  transform: scale(0.8);
 }
 .btn {
   border-radius: 3px;
   font-size: inherit;
-  font-family: "Basier Regular", sans-serif;
+  font-family: 'Basier Regular', sans-serif;
   letter-spacing: 2px;
 }
 .btn-cancel {
@@ -1694,9 +1560,9 @@ button:focus {
   border: none !important;
   box-shadow: none !important;
   background-color: #77777745 !important;
-    padding: 10px 20px;
-    border-radius: 25px;
-    transition: all 0.5s;
+  padding: 10px 20px;
+  border-radius: 25px;
+  transition: all 0.5s;
 }
 .btn-icon-edit {
   font-size: 20px;
@@ -1708,7 +1574,7 @@ button:focus {
   font-size: 20px;
   border: none;
   background: transparent;
-  color: #D41367;
+  color: #d41367;
 }
 .btn:focus {
   box-shadow: none;
@@ -1758,8 +1624,8 @@ button:focus {
 }
 .btn-primary {
   color: #fff;
-  background-color: #2A7DE1;
-  border: 1px solid #2A7DE1;
+  background-color: #2a7de1;
+  border: 1px solid #2a7de1;
   padding: 10px 20px;
   border-radius: 25px;
   transition: all 0.5s;
@@ -1769,7 +1635,7 @@ button:focus {
 .btn-primary.active {
   border-color: #2469bb;
   background-color: #2469bb;
-  box-shadow: 0 10px 33px -14px #2A7DE1;
+  box-shadow: 0 10px 33px -14px #2a7de1;
   color: #ffffff;
 }
 .btn-primary.disabled,
@@ -1894,8 +1760,8 @@ fieldset[disabled] .btn-default.active {
 }
 .btn-warning {
   color: #ffffff !important;
-  background-color: #FFBF3C !important;
-  border: 1px solid #FFBF3C !important;
+  background-color: #ffbf3c !important;
+  border: 1px solid #ffbf3c !important;
   padding: 10px 20px;
   border-radius: 25px;
   transition: all 0.5s;
@@ -1906,7 +1772,7 @@ fieldset[disabled] .btn-default.active {
   color: #ffffff !important;
   border-color: #e2aa37 !important;
   background-color: #e2aa37 !important;
-  box-shadow: 0 10px 33px -14px #FFBF3C !important;
+  box-shadow: 0 10px 33px -14px #ffbf3c !important;
 }
 .btn-warning.disabled,
 .btn-warning:disabled {
@@ -2160,7 +2026,7 @@ button.dim:active:before {
 }
 .label-primary,
 .badge-primary {
-  background-color: #2A7DE1;
+  background-color: #2a7de1;
   color: #ffffff;
 }
 .label-success,
@@ -2170,22 +2036,22 @@ button.dim:active:before {
 }
 .label-warning,
 .badge-warning {
-  background-color: #FFBF3C;
+  background-color: #ffbf3c;
   color: #ffffff;
 }
 .label-warning-light,
 .badge-warning-light {
-  background-color: #FFBF3C;
+  background-color: #ffbf3c;
   color: #ffffff;
 }
 .label-danger,
 .badge-danger {
-  background-color: #D41367;
+  background-color: #d41367;
   color: #ffffff;
 }
 .label-info,
 .badge-info {
-  background-color: #2A7DE1;
+  background-color: #2a7de1;
   color: #ffffff;
 }
 .label-inverse,
@@ -2857,7 +2723,7 @@ div.dt-button-info {
   display: none;
 }
 .pace .pace-progress {
-  background-image: linear-gradient(to right, #ffb900, #D41367, #2A7DE1);
+  background-image: linear-gradient(to right, #f3a977, #4339F2, #B7791D);
   position: fixed;
   z-index: 2040;
   top: 0;
@@ -3008,20 +2874,20 @@ select.form-control:not([size]):not([multiple]) {
 }
 .has-warning .form-control,
 .has-warning .form-control:focus {
-  border-color: #FFBF3C;
+  border-color: #ffbf3c;
 }
 .has-error .form-control,
 .has-error .form-control:focus {
-  border-color: #D41367;
+  border-color: #d41367;
 }
 .has-success .control-label {
   color: #4cd964;
 }
 .has-warning .control-label {
-  color: #FFBF3C;
+  color: #ffbf3c;
 }
 .has-error .control-label {
-  color: #D41367;
+  color: #d41367;
 }
 .input-group-addon {
   background-color: #fff;
@@ -4660,7 +4526,7 @@ body.boxed-layout #wrapper {
   overflow: hidden;
 }
 a {
-  color: #337ab7;
+  color: #b7791d;
   cursor: pointer;
 }
 a:hover,
@@ -4881,7 +4747,7 @@ body.body-small .footer.fixed {
   margin-bottom: 5px;
 }
 .panel-body {
-  padding: 15px 0 ;
+  padding: 15px 0;
 }
 /* Bootstrap 3.3.x panels */
 .panel {
@@ -5131,7 +4997,7 @@ code {
   -moz-border-right-colors: none;
   -moz-border-top-colors: none;
   background-color: #ffffff;
-  border-color: #2A7DE1;
+  border-color: #2a7de1;
   border-image: none;
   border-style: solid solid none;
   border-width: 2px 0 0;
@@ -5287,11 +5153,11 @@ table.table-mail tr td {
   background-color: #262626;
 }
 .panel-primary {
-  border-color: #2A7DE1;
+  border-color: #2a7de1;
 }
 .panel-primary > .panel-heading {
-  background-color: #2A7DE1;
-  border-color: #2A7DE1;
+  background-color: #2a7de1;
+  border-color: #2a7de1;
 }
 .panel-success {
   border-color: #1c84c6;
@@ -5302,31 +5168,31 @@ table.table-mail tr td {
   color: #ffffff;
 }
 .panel-info {
-  border-color: #2A7DE1;
+  border-color: #2a7de1;
 }
 .panel-info > .panel-heading {
-  background-color: #2A7DE1;
-  border-color: #2A7DE1;
+  background-color: #2a7de1;
+  border-color: #2a7de1;
   color: #ffffff;
 }
 .panel-warning {
   border-color: #f8ac59;
 }
 .panel-warning > .panel-heading {
-  background-color: #FFBF3C;
-  border-color: #FFBF3C;
+  background-color: #ffbf3c;
+  border-color: #ffbf3c;
   color: #ffffff;
 }
 .panel-danger {
-  border-color: #D41367;
+  border-color: #d41367;
 }
 .panel-danger > .panel-heading {
-  background-color: #D41367;
-  border-color: #D41367;
+  background-color: #d41367;
+  border-color: #d41367;
   color: #ffffff;
 }
 .progress-bar {
-  background-color: #2A7DE1;
+  background-color: #2a7de1;
 }
 .progress-small,
 .progress-small .progress-bar {
@@ -7144,7 +7010,7 @@ body.body-small .vote-icon {
 .sk-spinner-rotating-plane.sk-spinner {
   width: 30px;
   height: 30px;
-  background-color: #FFBF3C;
+  background-color: #ffbf3c;
   margin: 0 auto;
   -webkit-animation: sk-rotatePlane 1.2s infinite ease-in-out;
   animation: sk-rotatePlane 1.2s infinite ease-in-out;
@@ -7197,7 +7063,7 @@ body.body-small .vote-icon {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background-color: #FFBF3C;
+  background-color: #ffbf3c;
   opacity: 0.6;
   position: absolute;
   top: 0;
@@ -7251,7 +7117,7 @@ body.body-small .vote-icon {
   font-size: 10px;
 }
 .sk-spinner-wave div {
-  background-color: #FFBF3C;
+  background-color: #ffbf3c;
   height: 100%;
   width: 6px;
   display: inline-block;
@@ -7315,7 +7181,7 @@ body.body-small .vote-icon {
 }
 .sk-spinner-wandering-cubes .sk-cube1,
 .sk-spinner-wandering-cubes .sk-cube2 {
-  background-color: #FFBF3C;
+  background-color: #ffbf3c;
   width: 10px;
   height: 10px;
   position: absolute;
@@ -7384,7 +7250,7 @@ body.body-small .vote-icon {
   width: 40px;
   height: 40px;
   margin: 0 auto;
-  background-color: #FFBF3C;
+  background-color: #ffbf3c;
   border-radius: 100%;
   -webkit-animation: sk-pulseScaleOut 1s infinite ease-in-out;
   animation: sk-pulseScaleOut 1s infinite ease-in-out;
@@ -7436,7 +7302,7 @@ body.body-small .vote-icon {
   display: inline-block;
   position: absolute;
   top: 0;
-  background-color: #FFBF3C;
+  background-color: #ffbf3c;
   border-radius: 100%;
   -webkit-animation: sk-chasingDotsBounce 2s infinite ease-in-out;
   animation: sk-chasingDotsBounce 2s infinite ease-in-out;
@@ -7499,7 +7365,7 @@ body.body-small .vote-icon {
 .sk-spinner-three-bounce div {
   width: 18px;
   height: 18px;
-  background-color: #FFBF3C;
+  background-color: #ffbf3c;
   border-radius: 100%;
   display: inline-block;
   -webkit-animation: sk-threeBounceDelay 1.4s infinite ease-in-out;
@@ -7578,7 +7444,7 @@ body.body-small .vote-icon {
   margin: 0 auto;
   width: 20%;
   height: 20%;
-  background-color: #FFBF3C;
+  background-color: #ffbf3c;
   border-radius: 100%;
   -webkit-animation: sk-circleBounceDelay 1.2s infinite ease-in-out;
   animation: sk-circleBounceDelay 1.2s infinite ease-in-out;
@@ -7741,7 +7607,7 @@ body.body-small .vote-icon {
 .sk-spinner-cube-grid .sk-cube {
   width: 33%;
   height: 33%;
-  background-color: #FFBF3C;
+  background-color: #ffbf3c;
   float: left;
   -webkit-animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out;
   animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out;
@@ -7815,7 +7681,7 @@ body.body-small .vote-icon {
  *
  */
 .sk-spinner-wordpress.sk-spinner {
-  background-color: #FFBF3C;
+  background-color: #ffbf3c;
   width: 30px;
   height: 30px;
   border-radius: 30px;
@@ -7892,7 +7758,7 @@ body.body-small .vote-icon {
   margin: 0 auto;
   width: 18%;
   height: 18%;
-  background-color: #FFBF3C;
+  background-color: #ffbf3c;
   border-radius: 100%;
   -webkit-animation: sk-circleFadeDelay 1.2s infinite ease-in-out;
   animation: sk-circleFadeDelay 1.2s infinite ease-in-out;
@@ -8915,7 +8781,7 @@ body.rtls.top-navigation .footer.fixed {
   margin-right: 0;
 }
 .spin-icon {
-  background: #FFBF3C;
+  background: #ffbf3c;
   position: absolute;
   padding: 7px 10px 7px 13px;
   border-radius: 20px 0 0 20px;
