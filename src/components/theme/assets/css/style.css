@@ -1550,7 +1550,7 @@ button:focus {
 .btn {
   border-radius: 3px;
   font-size: inherit;
-  font-family: 'Basier Regular', sans-serif;
+  font-family: 'Roboto', sans-serif;
   letter-spacing: 2px;
 }
 .btn-cancel {
@@ -2000,7 +2000,7 @@ button.dim:active:before {
 .label {
   background-color: #d1dade;
   color: #5e5e5e;
-  font-family: 'Basier Regular', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 600;
   padding: 3px 8px;
   text-shadow: none;
@@ -2015,7 +2015,7 @@ button.dim:active:before {
 .badge {
   background-color: #d1dade;
   color: #5e5e5e;
-  font-family: 'Basier Regular', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 11px;
   font-weight: 600;
   padding-bottom: 4px;
@@ -2723,7 +2723,7 @@ div.dt-button-info {
   display: none;
 }
 .pace .pace-progress {
-  background-image: linear-gradient(to right, #f3a977, #4339F2, #B7791D);
+  background-image: linear-gradient(to right, #f3a977, #4339f2, #b7791d);
   position: fixed;
   z-index: 2040;
   top: 0;
@@ -4486,10 +4486,10 @@ samp {
   border-bottom: 1px solid #e7eaec;
 }
 body {
-  font-family: 'Basier Regular', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  background-color: #fff;
+  font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background-color: #c4872c;
   font-size: 13px;
-  color: #000;
+  color: #676a6c;
   overflow-x: hidden;
 }
 html,
@@ -4758,7 +4758,7 @@ body.body-small .footer.fixed {
   border-radius: 15px;
 }
 .panel-heading {
-  font-family: 'Basier Bold', helvetica, arial, sans-serif;
+  font-family: 'Roboto', helvetica, arial, sans-serif;
   color: white;
   font-size: 15px;
   letter-spacing: 1px;
@@ -5016,7 +5016,7 @@ code {
   border-image: none;
   border-style: solid solid none;
   border-width: 1px 0;
-  border-radius: 0 0 10px 10px;
+  border-radius: 10px;
 }
 .ibox-footer {
   color: inherit;
@@ -7927,7 +7927,7 @@ body.body-small .vote-icon {
 }
 body.landing-page {
   color: #676a6c;
-  font-family: 'Basier Regular', helvetica, arial, sans-serif;
+  font-family: 'Roboto', helvetica, arial, sans-serif;
   background-color: #fff;
 }
 .landing-page {
@@ -8015,7 +8015,7 @@ body.landing-page {
 }
 .landing-page .navbar-default .nav li a {
   color: #fff;
-  font-family: 'Basier Regular', helvetica, arial, sans-serif;
+  font-family: 'Roboto', helvetica, arial, sans-serif;
   font-weight: 700;
   letter-spacing: 1px;
   text-transform: uppercase;
