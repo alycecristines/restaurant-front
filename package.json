@@ -74,8 +74,13 @@
   "devDependencies": {
     "babel-plugin-import": "1.13.0",
     "customize-cra": "0.9.1",
+    "eslint": "^7.23.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-react": "^7.23.1",
     "less": "3.11.1",
     "less-loader": "5.0.0",
+    "prettier": "^2.2.1",
     "react-app-rewired": "2.1.5",
     "reactotron-react-js": "^3.3.7"
   }
