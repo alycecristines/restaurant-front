@@ -3,6 +3,12 @@ import $ from 'jquery';
 import { Router } from 'react-router-dom';
 import history from '../../helpers/history';
 import Routes from '../../routes';
+
+import Progress from './progress';
+import Navigation from './navigation';
+import TopHeader from './topHeader';
+import Footer from './footer';
+
 import './assets/dependencies';
 import { correctHeight, detectBody } from './helpers/helpers';
 
@@ -14,13 +20,31 @@ const Main = () => {
     });
   }, []);
 
+  // if (loginReducer.logged) { TODO: Adicionar validação para usuario logado
   return (
-    <div className="bg-login skin-1">
+    <div id="wrapper skin-1">
       <Router history={history}>
-        <Routes />
+        <div>
+          <Progress />
+          <Navigation />
+          <div id="page-wrapper" className="gray-bg">
+            <TopHeader />
+            <Routes />
+            <Footer />
+          </div>
+        </div>
       </Router>
     </div>
   );
+  // }
+
+  // return (
+  //   <div className="bg-login skin-1">
+  //     <Router history={history}>
+  //       <Routes />
+  //     </Router>
+  //   </div>
+  // );
 };
 
 export default Main;

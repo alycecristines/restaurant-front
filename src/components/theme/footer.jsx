@@ -18,7 +18,7 @@ export default class Footer extends Component {
 
           <div className="col-md-6" style={{ textAlign: 'right' }}>
             <img
-              style={{ width: '20%', marginTop: '-1%' }}
+              style={{ width: '3%', marginTop: '-1%' }}
               src="https://acsmack.blob.core.windows.net/acs/restaurant-project/logo"
               alt="Logo"
             />{' '}
