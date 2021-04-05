@@ -7,7 +7,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 [x] Node.js - In case you needed you can download it [here](https://nodejs.org/en/)
 [x] Yarn - In case you wanna use yarn intead of npm you can just add it by running `npm install -g yarn` on your console
 
-# Instaling dependencies for the project
+## Instaling dependencies for the project
 
 After you have node installed you need to execute `yarn` or `npm install` to install the dependencies necessary for running the app.
 
