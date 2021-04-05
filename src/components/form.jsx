@@ -72,7 +72,6 @@ const InputTextMask = ({
   tooltip,
   required,
   disabled,
-  placeholder,
   handleChange,
   error,
 }) => (
@@ -106,16 +105,12 @@ const InputTextMask = ({
  * Input Text Mask
  */
 const InputCurrency = ({
-  mask,
-  name,
   value,
   label,
   col,
   tooltip,
   required,
   labelStyle,
-  disabled,
-  placeholder,
   handleChange,
   error,
 }) => (
@@ -505,7 +500,7 @@ const SelectAntd = ({
         filterOption={(input, option) =>
           option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
         }>
-        {dataSource.map((p) => (
+        {dataSource.map(p => (
           <Option key={p.id} value={p.description}>
             {p.description}
           </Option>
@@ -560,7 +555,7 @@ const SelectCode = ({
         filterOption={(input, option) =>
           option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
         }>
-        {dataSource.map((p) => (
+        {dataSource.map(p => (
           <Option key={p.id} value={p.id}>
             {p.descricao}
           </Option>

@@ -7,11 +7,12 @@ import { Link } from 'react-router-dom';
 import { Center, Column, Form, Row } from '../../components/bootstrap';
 import { InputPassword, InputText } from '../../components/form';
 import Messages from '../../helpers/messages';
+import history from '../../helpers/history';
 
 const InnerForm = ({ values, errors, isSubmitting, handleSubmit, handleChange }) => {
   return (
     <Form handleSubmit={handleSubmit} className="m-t">
-      <div className="animated fadeInDown">
+      <div className="animated fadeInDown" style={{ marginBottom: 30 }}>
         <Row>
           <InputText
             name="email"
@@ -26,19 +27,19 @@ const InnerForm = ({ values, errors, isSubmitting, handleSubmit, handleChange })
 
         <Row>
           <InputPassword
-            name="senha"
+            name="password"
             handleChange={handleChange}
             col={12}
             required
-            error={errors.senha}
-            value={values.senha}
+            error={errors.password}
+            value={values.password}
             label="Senha"
           />
         </Row>
 
         <Column col={12}>
           <Row>
-            <Link to="/reset-senha">Esqueceu sua senha?</Link>
+            <Link to="/reset-password">Esqueceu sua senha?</Link>
           </Row>
         </Column>
 
@@ -49,10 +50,10 @@ const InnerForm = ({ values, errors, isSubmitting, handleSubmit, handleChange })
           <Center>OU</Center>
         </div>
         <Button
-          htmlType="submit"
+          onClick={() => history.push('/first-access')}
+          htmlType="button"
           className="outlined col-md-12 mt-3"
-          type="primary"
-          loading={isSubmitting}>
+          type="primary">
           Primeiro Acesso
         </Button>
       </div>
@@ -70,7 +71,8 @@ const LoginForm = withFormik({
     email: Yup.string().required(Messages.REQUIRED),
     password: Yup.string().required(Messages.REQUIRED),
   }),
-  handleSubmit(values, { props, setSubmitting }) {
+  // handleSubmit(values, { props, setSubmitting }) {
+  handleSubmit() {
     //TODO: Acionar o login da api
   },
 })(InnerForm);

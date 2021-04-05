@@ -58,19 +58,19 @@ a:hover {
 }
 /* form validation */
 .is-invalid {
-  color: #d41367;
+  color: #ee1818;
 }
 .is-invalid input {
-  border-color: #d41367 !important;
+  border-color: #ee1818 !important;
 }
 .is-invalid .ant-select-selection {
-  border-color: #d41367 !important;
+  border-color: #ee1818 !important;
 }
 .is-invalid .anticon {
-  color: #d41367 !important;
+  color: #ee1818 !important;
 }
 .is-invalid .ant-input-number {
-  border-color: #d41367 !important;
+  border-color: #ee1818 !important;
 }
 .hr-menu {
   margin-top: 0 !important;
@@ -207,10 +207,10 @@ a:hover {
   right: 15px !important;
 }
 .ant-select-selection__clear {
-  color: #d4136750 !important;
+  color: #ee181850 !important;
 }
 .ant-select-selection__clear:hover {
-  color: #d41367 !important;
+  color: #ee1818 !important;
 }
 .ant-input-number {
   font-size: 14px;
@@ -355,10 +355,10 @@ a:hover {
   border-radius: 0 0 15px 15px !important;
 }
 .ant-calendar-picker-clear {
-  color: #d4136750 !important;
+  color: #ee181850 !important;
 }
 .ant-calendar-picker-clear:hover {
-  color: #d41367bf !important;
+  color: #ee1818bf !important;
 }
 /* Toggle */
 .ant-switch-checked {
@@ -443,14 +443,14 @@ a:hover {
   width: 25px !important;
   height: 25px !important;
   line-height: 30px !important;
-  background-color: #d4136799 !important;
+  background-color: #ee181899 !important;
   color: #fff !important;
   border-radius: 50% !important;
   margin-top: 30% !important;
   margin-left: -30% !important;
 }
 .ant-modal-close-x:hover {
-  background-color: #d41367 !important;
+  background-color: #ee1818 !important;
 }
 .ant-modal-content {
   border-radius: 15px !important;
