@@ -1624,8 +1624,8 @@ button:focus {
 }
 .btn-primary {
   color: #fff;
-  background-color: #2a7de1;
-  border: 1px solid #2a7de1;
+  background-color: #b7791d;
+  border: 1px solid #b7791d;
   padding: 10px 20px;
   border-radius: 25px;
   transition: all 0.5s;
@@ -1635,7 +1635,7 @@ button:focus {
 .btn-primary.active {
   border-color: #2469bb;
   background-color: #2469bb;
-  box-shadow: 0 10px 33px -14px #2a7de1;
+  box-shadow: 0 10px 33px -14px #b7791d;
   color: #ffffff;
 }
 .btn-primary.disabled,
@@ -2026,7 +2026,7 @@ button.dim:active:before {
 }
 .label-primary,
 .badge-primary {
-  background-color: #2a7de1;
+  background-color: #b7791d;
   color: #ffffff;
 }
 .label-success,
@@ -2051,7 +2051,7 @@ button.dim:active:before {
 }
 .label-info,
 .badge-info {
-  background-color: #2a7de1;
+  background-color: #b7791d;
   color: #ffffff;
 }
 .label-inverse,
@@ -4997,9 +4997,9 @@ code {
   -moz-border-right-colors: none;
   -moz-border-top-colors: none;
   background-color: #ffffff;
-  border-color: #2a7de1;
+  border-color: #b7791d;
   border-image: none;
-  border-style: solid solid none;
+  /* border-style: solid solid none; */
   border-width: 2px 0 0;
   color: inherit;
   margin-bottom: 0;
@@ -5007,6 +5007,7 @@ code {
   min-height: 48px;
   position: relative;
   clear: both;
+  border-radius: 10px 10px 0 0;
 }
 .ibox-content {
   background-color: #ffffff;
@@ -5016,7 +5017,7 @@ code {
   border-image: none;
   border-style: solid solid none;
   border-width: 1px 0;
-  border-radius: 10px;
+  border-radius: 0 0 10px 10px;
 }
 .ibox-footer {
   color: inherit;
@@ -5153,11 +5154,11 @@ table.table-mail tr td {
   background-color: #262626;
 }
 .panel-primary {
-  border-color: #2a7de1;
+  border-color: #b7791d;
 }
 .panel-primary > .panel-heading {
-  background-color: #2a7de1;
-  border-color: #2a7de1;
+  background-color: #b7791d;
+  border-color: #b7791d;
 }
 .panel-success {
   border-color: #1c84c6;
@@ -5168,11 +5169,11 @@ table.table-mail tr td {
   color: #ffffff;
 }
 .panel-info {
-  border-color: #2a7de1;
+  border-color: #b7791d;
 }
 .panel-info > .panel-heading {
-  background-color: #2a7de1;
-  border-color: #2a7de1;
+  background-color: #b7791d;
+  border-color: #b7791d;
   color: #ffffff;
 }
 .panel-warning {
@@ -5192,7 +5193,7 @@ table.table-mail tr td {
   color: #ffffff;
 }
 .progress-bar {
-  background-color: #2a7de1;
+  background-color: #b7791d;
 }
 .progress-small,
 .progress-small .progress-bar {

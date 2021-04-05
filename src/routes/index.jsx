@@ -36,7 +36,7 @@ const Routes = () => (
     <Route exact path="/validate-code" component={ValidateCode} />
     <Route exact path="/new-password" component={NewPassword} />
     <Route exact path="/first-access" component={FirstAccess} />
-    <PrivateRouter exact path="/" component={Dashboard} />
+    <Route exact path="/" component={Dashboard} />
   </Switch>
 );
 
