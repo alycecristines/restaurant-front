@@ -2,13 +2,17 @@ import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Login from '../pages/login';
+import ResetPassword from '../pages/reset-password';
+import ValidateCode from '../pages/validate-code';
+import NewPassword from '../pages/new-password';
+import FirstAccess from '../pages/first-access';
 import Dashboard from '../pages/dashboard';
 
 const PrivateRouter = ({ component: Component, tipo, ...rest }) => {
   return (
     <Route
       {...rest}
-      render={(props) =>
+      render={props =>
         !!localStorage.getItem('@rest:token') ? (
           <Component {...props} />
         ) : (
@@ -28,6 +32,10 @@ const PrivateRouter = ({ component: Component, tipo, ...rest }) => {
 const Routes = () => (
   <Switch>
     <Route exact path="/login" component={Login} />
+    <Route exact path="/reset-password" component={ResetPassword} />
+    <Route exact path="/validate-code" component={ValidateCode} />
+    <Route exact path="/new-password" component={NewPassword} />
+    <Route exact path="/first-access" component={FirstAccess} />
     <PrivateRouter exact path="/" component={Dashboard} />
   </Switch>
 );
