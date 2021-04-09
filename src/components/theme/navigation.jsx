@@ -37,13 +37,13 @@ class Navigation extends Component {
             <hr className="hr-menu" />
 
             <MenuItem path="/" icon="home" label="Dashboard" />
-            <MenuTree icon="list" label="Cadastros">
-              <MenuItem path="/" icon="home" label="Empresas" />
-              <MenuItem path="/" icon="home" label="Produtos" />
+            <MenuTree icon="folder" label="Cadastros">
+              <MenuItem path="/companies" label="Empresas" />
+              {/* <MenuItem path="/products" label="Produtos" /> */}
             </MenuTree>
-            <MenuItem path="/" icon="home" label="Pedidos" />
-            <MenuItem path="/" icon="home" label="Relatórios" />
-            <MenuItem path="/" icon="home" label="Usuários" />
+            {/* <MenuItem path="/orders" icon="list" label="Pedidos" />
+            <MenuItem path="/reports" icon="pie-chart" label="Relatórios" />
+            <MenuItem path="/users" icon="users" label="Usuários" /> */}
           </ul>
         </div>
       </nav>

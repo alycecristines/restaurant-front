@@ -3,16 +3,19 @@ import { Button } from 'antd';
 import { withFormik } from 'formik';
 import * as Yup from 'yup';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import { Center, Column, Form, Row } from '../../components/bootstrap';
 import { InputPassword, InputText } from '../../components/form';
 import Messages from '../../helpers/messages';
 import history from '../../helpers/history';
 
-const InnerForm = ({ values, errors, isSubmitting, handleSubmit, handleChange }) => {
+import { loginUser } from '../../actions/loginActions';
+
+const InnerForm = ({ values, errors, handleSubmit, handleChange }) => {
   return (
     <Form handleSubmit={handleSubmit} className="m-t">
-      <div className="animated fadeInDown" style={{ marginBottom: 30 }}>
+      <div style={{ marginBottom: 30 }}>
         <Row>
           <InputText
             name="email"
@@ -43,7 +46,7 @@ const InnerForm = ({ values, errors, isSubmitting, handleSubmit, handleChange })
           </Row>
         </Column>
 
-        <Button htmlType="submit" className="col-md-12 mt-3" type="primary" loading={isSubmitting}>
+        <Button htmlType="submit" className="col-md-12 mt-3" type="primary">
           Entrar
         </Button>
         <div style={{ marginTop: 15 }}>
@@ -71,10 +74,13 @@ const LoginForm = withFormik({
     email: Yup.string().required(Messages.REQUIRED),
     password: Yup.string().required(Messages.REQUIRED),
   }),
-  // handleSubmit(values, { props, setSubmitting }) {
-  handleSubmit() {
-    //TODO: Acionar o login da api
+  handleSubmit(values, { props, setSubmitting }) {
+    props.loginAction(values);
   },
 })(InnerForm);
 
-export default LoginForm;
+const mapDispatchToProps = {
+  loginAction: loginUser,
+};
+
+export default connect(null, mapDispatchToProps)(LoginForm);
