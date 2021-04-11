@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/no-string-refs */
 import React, { Component } from 'react';
 import $ from 'jquery';

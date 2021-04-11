@@ -10,7 +10,7 @@ import EmployeesGrid from './employeesGrid';
 import { connect, useSelector } from 'react-redux';
 import { addEmployee } from '../../../../actions/employeesActions';
 
-function InnerForm({ values, errors, isSubmitting, handleSubmit, handleChange }) {
+function InnerForm({ values, errors, isSubmitting, handleSubmit, handleChange, setFieldValue }) {
   const { departmentIsLoading, departmentRecords } = useSelector(state => state.departments);
 
   return (
@@ -42,7 +42,7 @@ function InnerForm({ values, errors, isSubmitting, handleSubmit, handleChange })
                   <SelectCode
                     name="departmentId"
                     col={3}
-                    handleChange={handleChange}
+                    handleChange={value => setFieldValue('departmentId', value)}
                     required
                     error={errors.departmentId}
                     value={values.departmentId}

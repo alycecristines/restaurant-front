@@ -76,7 +76,12 @@ export const getEmployeeById = (id, setValues) => dispatch => {
     });
 };
 
-export const addEmployee = (values, resetForm, setErrors, setSubmitting) => dispatch => {
+export const addEmployee = (
+  values,
+  resetForm = () => {},
+  setErrors = () => {},
+  setSubmitting = () => {},
+) => dispatch => {
   dispatch([employeesSetIsLoading(true), setSubmitting(true)]);
 
   api
@@ -87,7 +92,12 @@ export const addEmployee = (values, resetForm, setErrors, setSubmitting) => disp
         description: 'Adicionado com sucesso.',
       });
 
-      dispatch([resetForm(), setSubmitting(false), employeesSetIsLoading(false)]);
+      dispatch([
+        resetForm(),
+        setSubmitting(false),
+        employeesSetIsLoading(false),
+        getAllEmployees(),
+      ]);
     })
     .catch(ex => {
       ex && setErrors(ex.errors);

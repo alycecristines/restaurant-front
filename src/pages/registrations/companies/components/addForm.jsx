@@ -11,6 +11,7 @@ import {
   companiesSetRecord,
 } from '../../../../actions/companiesActions';
 import { departmentsSetSearch } from '../../../../actions/departmentsActions';
+import history from '../../../../helpers/history';
 
 const { Step } = Steps;
 
@@ -23,7 +24,7 @@ const AddForm = () => {
     return function cleanup() {
       dispatch([
         companiesSetRecord({}),
-        departmentsSetSearch({ companyId: '' }),
+        departmentsSetSearch({ description: '', companyId: '' }),
         companiesSetNextStep(false),
         companiesIsDisabledFields(false),
       ]);
@@ -90,7 +91,7 @@ const AddForm = () => {
           </Button>
         )}
         {current === steps.length - 1 && (
-          <Button type="primary" onClick={() => message.success('Processing complete!')}>
+          <Button type="primary" onClick={() => history.push('/companies')}>
             Finalizar
           </Button>
         )}

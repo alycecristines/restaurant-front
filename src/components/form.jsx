@@ -557,7 +557,7 @@ const SelectCode = ({
         }>
         {dataSource.map(p => (
           <Option key={p.id} value={p.id}>
-            {p.descricao}
+            {p.description}
           </Option>
         ))}
       </AntdSelect>

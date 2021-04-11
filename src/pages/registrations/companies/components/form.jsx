@@ -11,10 +11,22 @@ import Messages from '../../../../helpers/messages';
 import { Container, Div } from './styles';
 import DepartmentGrid from './departmentsGrid';
 import EmployeesGrid from './employeesGrid';
-import { useDispatch, useSelector, connect } from 'react-redux';
-import { getCompanyById, updateCompany } from '../../../../actions/companiesActions';
-import { addDepartment, getAllDepartments } from '../../../../actions/departmentsActions';
-import { addEmployee, getAllEmployees } from '../../../../actions/employeesActions';
+import { useDispatch, connect } from 'react-redux';
+import {
+  companiesSetRecord,
+  getCompanyById,
+  updateCompany,
+} from '../../../../actions/companiesActions';
+import {
+  addDepartment,
+  departmentsSetRecords,
+  departmentsSetSearch,
+} from '../../../../actions/departmentsActions';
+import {
+  addEmployee,
+  employeesSetRecords,
+  employeesSetSearch,
+} from '../../../../actions/employeesActions';
 
 const InnerForm = ({
   departments,
@@ -24,7 +36,6 @@ const InnerForm = ({
   isSubmitting,
   handleSubmit,
   handleChange,
-  setFieldValue,
   setValues,
 }) => {
   const [data, setData] = useState({ description: '', name: '', email: '', departmentId: '' });
@@ -32,15 +43,25 @@ const InnerForm = ({
 
   useEffect(() => {
     let id = window.location.pathname.replace('/companies/edit/', '');
-
     if (id) {
-      dispatch([getCompanyById(id, setValues), getAllDepartments(), getAllEmployees()]);
+      dispatch([getCompanyById(id, setValues)]);
     }
-  }, []);
 
-  function handleChange(name, value) {
-    setFieldValue(name, value);
-  }
+    return function cleanup() {
+      dispatch([
+        companiesSetRecord({}),
+        departmentsSetSearch({ description: '', companyId: '' }),
+        employeesSetSearch({
+          name: '',
+          email: '',
+          departmentId: '',
+          companyId: '',
+        }),
+        departmentsSetRecords([]),
+        employeesSetRecords([]),
+      ]);
+    };
+  }, []);
 
   function handleAddDepartments() {
     if (data.description == '') {
@@ -225,9 +246,9 @@ const InnerForm = ({
         <Column col="12">
           <Row>
             <InputText
-              name="description"
+              name="data.description"
               col={6}
-              handleChange={value => setData({ description: value })}
+              handleChange={e => setData({ ...data, description: e.target.value })}
               required
               value={data.description}
               label="Nome"
@@ -254,25 +275,25 @@ const InnerForm = ({
         <Column col="12">
           <Row>
             <InputText
-              name="name"
+              name="data.name"
               col={7}
-              handleChange={value => setData({ name: value })}
+              handleChange={e => setData({ ...data, name: e.target.value })}
               required
               value={data.name}
               label="Nome"
             />
             <InputText
-              name="email"
+              name="data.email"
               col={5}
-              handleChange={value => setData({ email: value })}
+              handleChange={e => setData({ ...data, email: e.target.value })}
               required
               value={data.email}
               label="E-mail"
             />
             <SelectCode
-              name="departmentId"
+              name="data.departmentId"
               col={3}
-              handleChange={value => setData({ departmentId: value })}
+              handleChange={value => setData({ ...data, departmentId: value })}
               required
               value={data.departmentId}
               label="Departamento"
@@ -300,32 +321,12 @@ const InnerForm = ({
 
 const CompanyForm = withFormik({
   validateOnChange: false,
-  mapPropsToValues: ({
-    corporateName,
-    businessName,
-    registrationNumber,
-    phone,
-    address,
-    street,
-    secondary,
-    buildingNumber,
-    district,
-    city,
-    state,
-    zipCode,
-  }) => ({
+  mapPropsToValues: ({ corporateName, businessName, registrationNumber, phone, address }) => ({
     corporateName: corporateName || '',
     businessName: businessName || '',
     registrationNumber: registrationNumber || '',
     phone: phone || '',
     address: address || '',
-    street: street || '',
-    secondary: secondary || '',
-    buildingNumber: buildingNumber || '',
-    district: district || '',
-    city: city || '',
-    state: state || '',
-    zipCode: zipCode || '',
   }),
   validationSchema: Yup.object().shape({
     corporateName: Yup.string().required(Messages.REQUIRED),
@@ -333,13 +334,6 @@ const CompanyForm = withFormik({
     registrationNumber: Yup.string().required(Messages.REQUIRED),
     phone: Yup.object().required(Messages.REQUIRED),
     address: Yup.object().required(Messages.REQUIRED),
-    street: Yup.string().required(Messages.REQUIRED),
-    secondary: Yup.string().required(Messages.REQUIRED),
-    buildingNumber: Yup.string().required(Messages.REQUIRED),
-    district: Yup.string().required(Messages.REQUIRED),
-    city: Yup.string().required(Messages.REQUIRED),
-    state: Yup.string().required(Messages.REQUIRED),
-    zipCode: Yup.string().required(Messages.REQUIRED),
   }),
 
   handleSubmit(values, { props, setErrors, setSubmitting }) {

@@ -2,12 +2,17 @@
 import React, { useEffect } from 'react';
 import { Table, Tooltip } from 'antd';
 import { withRouter } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteEmployee, getAllEmployees } from '../../../../actions/employeesActions';
 
-const EmployeeGrid = () => {
+const EmployeeGrid = props => {
+  const { employeeRecords, employeeIsLoading } = useSelector(state => state.employees);
+  const dispatch = useDispatch();
+
   const employeeColumns = [
     {
       title: 'id',
-      dataIndex: 'Id',
+      dataIndex: 'id',
     },
     {
       title: 'Nome',
@@ -15,7 +20,7 @@ const EmployeeGrid = () => {
     },
     {
       title: 'Departamento',
-      dataIndex: 'name',
+      dataIndex: 'departmentId',
     },
     {
       title: 'Ação',
@@ -27,7 +32,8 @@ const EmployeeGrid = () => {
           <div>
             <Tooltip title="Excluir">
               <button
-                // onClick={() => this.props.colaboradorAtendimentoActions.delete(record.id)}
+                type="button"
+                onClick={() => dispatch(deleteEmployee(record.id))}
                 className="btn-icon-delete">
                 <i className="fa fa-close"></i>
               </button>
@@ -39,21 +45,19 @@ const EmployeeGrid = () => {
   ];
 
   useEffect(() => {
-    // if (this.props.match.params.id) {
-    //   this.props.colaboradorAtendimentoActions.getByColaboradorId( TODO
-    //     this.props.colaboradorReducer.colaboradorDetails.id,
-    //   );
-    // }
+    if (props.match.params.id) {
+      dispatch(getAllEmployees());
+    }
   }, []);
 
   return (
     <div className="panel panel-default">
       <div className="panel-body no-padding">
         <Table
-          // loading={this.props.colaboradorAtendimentoReducer.loading} TODO
+          loading={employeeIsLoading}
           // TODO: Add pagination
           rowKey="id"
-          // dataSource={this.props.colaboradorAtendimentoReducer.records} TODO
+          dataSource={employeeRecords}
           columns={employeeColumns}
         />
       </div>

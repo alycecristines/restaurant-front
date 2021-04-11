@@ -28,6 +28,7 @@ const DepartmentGrid = props => {
           <div>
             <Tooltip title="Excluir">
               <button
+                type="button"
                 onClick={() => dispatch(deleteDepartment(record.id))}
                 className="btn-icon-delete">
                 <i className="fa fa-close"></i>

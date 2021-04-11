@@ -27,7 +27,7 @@ const GridCompanies = ({ title }) => {
       title: 'CNPJ',
       dataIndex: 'registrationNumber',
       width: '30%',
-      render: (text, record) => {
+      render: text => {
         return VMasker.toPattern(text, '99.999.999/9999-99');
       },
     },
@@ -70,13 +70,13 @@ const GridCompanies = ({ title }) => {
     },
   ];
 
-  function onChangePage(page, pageSize) {
-    // TODO: adicionar o getAll(page - 1, pageSize);
-  }
+  // function onChangePage(page, pageSize) {
+  //   dispatch(getAllCompanies(page-1, pageSize));
+  // }
 
-  function onShowSizeChange(current, size) {
-    // TODO: adicionar o getAll(0, size);
-  }
+  // function onShowSizeChange(current, size) {
+  //   dispatch(getAllCompanies(0, size));
+  // }
 
   return (
     <div className="panel panel-primary">

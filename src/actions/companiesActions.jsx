@@ -90,8 +90,11 @@ export const getCompanyById = (id, setValues) => dispatch => {
   api
     .get(`/companies/${id}`)
     .then(response => {
-      const { data } = response;
-      dispatch([setValues(data), companiesSetIsLoading(false)]);
+      dispatch([
+        setValues(response?.data?.data),
+        companiesSetRecord(response?.data?.data),
+        companiesSetIsLoading(false),
+      ]);
     })
     .catch(ex => {
       notification['error']({

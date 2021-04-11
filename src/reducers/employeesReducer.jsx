@@ -12,7 +12,7 @@ export default (state = INICIAL_STATE, action) => {
   switch (action.type) {
     case Types.EMPLOYEES_IS_LOADING:
       return { ...state, employeeIsLoading: action.payload };
-    case Types.DEPARTMENTS_GET_ALL:
+    case Types.EMPLOYEES_GET_ALL:
       return { ...state, employeeRecords: action.payload };
     case Types.EMPLOYEES_CURRENT_PAGE:
       return { ...state, employeeCurrentPage: action.payload };
