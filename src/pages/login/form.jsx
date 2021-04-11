@@ -74,7 +74,7 @@ const LoginForm = withFormik({
     email: Yup.string().required(Messages.REQUIRED),
     password: Yup.string().required(Messages.REQUIRED),
   }),
-  handleSubmit(values, { props, setSubmitting }) {
+  handleSubmit(values, { props }) {
     props.loginAction(values);
   },
 })(InnerForm);

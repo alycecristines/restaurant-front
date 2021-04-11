@@ -7,8 +7,12 @@ import { Row, Column, Form, Br, Panel } from '../../../../components/bootstrap';
 import { InputText } from '../../../../components/form';
 import { Container, Div } from './styles';
 import DepartmentsGrid from './departmentsGrid';
+import { connect, useSelector } from 'react-redux';
+import { addDepartment } from '../../../../actions/departmentsActions';
 
 function InnerForm({ values, errors, isSubmitting, handleSubmit, handleChange }) {
+  const { departmentIsLoading } = useSelector(state => state.departments);
+
   return (
     <Form handleSubmit={handleSubmit}>
       <Container>
@@ -28,12 +32,11 @@ function InnerForm({ values, errors, isSubmitting, handleSubmit, handleChange })
                   />
                   <Button
                     style={{ marginTop: 27 }}
-                    htmlType="button"
-                    //onClick={TODO: handleAddDepartment}
+                    htmlType="submit"
+                    disabled={departmentIsLoading}
                     className="pull-right"
                     type="primary"
-                    // loading={this.props.colaboradorReducer.loading}
-                  >
+                    loading={isSubmitting}>
                     Adicionar
                   </Button>
                 </Row>
@@ -45,18 +48,6 @@ function InnerForm({ values, errors, isSubmitting, handleSubmit, handleChange })
           </Column>
         </Div>
       </Container>
-
-      {/* <Row>
-        <Column col="12">
-          <Button
-            htmlType="submit"
-            className="pull-right btn btn-primary"
-            type="primary"
-            loading={isSubmitting}>
-            Salvar <i className="fa fa-check ml-1"></i>
-          </Button>
-        </Column>
-      </Row> */}
 
       <Br />
     </Form>
@@ -73,12 +64,12 @@ const StepTwo = withFormik({
   }),
 
   handleSubmit(values, { props, resetForm, setErrors, setSubmitting }) {
-    if (!props.match.params.id) {
-      // props.perfilActions.add(values, resetForm, setErrors, setSubmitting); TODO
-    } else {
-      // props.perfilActions.update(values, resetForm, setErrors, setSubmitting); TODO
-    }
+    props.add(values, resetForm, setErrors, setSubmitting);
   },
 })(InnerForm);
 
-export default StepTwo;
+const mapDispatchToProps = {
+  add: addDepartment,
+};
+
+export default connect(null, mapDispatchToProps)(StepTwo);

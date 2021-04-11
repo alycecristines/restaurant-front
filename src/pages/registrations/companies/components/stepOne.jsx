@@ -6,8 +6,12 @@ import Messages from '../../../../helpers/messages';
 import { Row, Column, Form, Br } from '../../../../components/bootstrap';
 import { InputText } from '../../../../components/form';
 import { Container, Div } from './styles';
+import { addCompany } from '../../../../actions/companiesActions';
+import { connect, useSelector } from 'react-redux';
 
 function InnerForm({ values, errors, isSubmitting, handleSubmit, handleChange }) {
+  const { companiesDisableFields } = useSelector(state => state.companies);
+
   return (
     <Form handleSubmit={handleSubmit}>
       <Container>
@@ -25,6 +29,7 @@ function InnerForm({ values, errors, isSubmitting, handleSubmit, handleChange })
                 col={6}
                 handleChange={handleChange}
                 required
+                disabled={companiesDisableFields}
                 error={errors.corporateName}
                 value={values.corporateName}
                 label="Razão Social"
@@ -35,6 +40,7 @@ function InnerForm({ values, errors, isSubmitting, handleSubmit, handleChange })
                 col={6}
                 handleChange={handleChange}
                 required
+                disabled={companiesDisableFields}
                 error={errors.businessName}
                 value={values.businessName}
                 label="Nome Fantasia"
@@ -42,109 +48,142 @@ function InnerForm({ values, errors, isSubmitting, handleSubmit, handleChange })
               {/* registrationNumber */}
               <InputText
                 name="registrationNumber"
-                col={4}
+                col={5}
                 handleChange={handleChange}
                 required
+                disabled={companiesDisableFields}
                 error={errors.registrationNumber}
                 value={values.registrationNumber}
                 label="CNPJ"
               />
-              {/* phone */}
+              {/* phone.areaCode */}
               <InputText
-                name="phone"
-                col={4}
+                name="phone.areaCode"
+                col={2}
                 handleChange={handleChange}
                 required
+                disabled={companiesDisableFields}
                 error={errors.phone}
-                value={values.phone}
+                value={values.phone.areaCode}
+                label="DDD"
+              />
+              {/* phone.number */}
+              <InputText
+                name="phone.number"
+                col={5}
+                handleChange={handleChange}
+                required
+                disabled={companiesDisableFields}
+                error={errors.phone}
+                value={values.phone.number}
                 label="Telefone"
               />
-              {/* street */}
+              {/* address.street */}
               <InputText
-                name="street"
+                name="address.street"
                 col={4}
                 handleChange={handleChange}
                 required
-                error={errors.street}
-                value={values.street}
+                disabled={companiesDisableFields}
+                error={errors.address}
+                value={values.address.street}
                 label="Logradouro"
               />
-              {/* secondary */}
+              {/* address.secondary */}
               <InputText
-                name="secondary"
+                name="address.secondary"
                 col={4}
                 handleChange={handleChange}
                 required
-                error={errors.secondary}
-                value={values.secondary}
+                disabled={companiesDisableFields}
+                error={errors.address}
+                value={values.address.secondary}
                 label="Complemento"
               />
-              {/* district */}
+              {/* address.district */}
               <InputText
-                name="district"
+                name="address.district"
                 col={4}
                 handleChange={handleChange}
                 required
-                error={errors.district}
-                value={values.district}
+                disabled={companiesDisableFields}
+                error={errors.address}
+                value={values.address.district}
                 label="Setor"
               />
-              {/* buildingNumber */}
+              {/* address.buildingNumber */}
               <InputText
-                name="buildingNumber"
+                name="address.buildingNumber"
                 col={4}
                 handleChange={handleChange}
                 required
-                error={errors.buildingNumber}
-                value={values.buildingNumber}
+                disabled={companiesDisableFields}
+                error={errors.address}
+                value={values.address.buildingNumber}
                 label="Número"
               />
-              {/* city */}
+              {/* address.city */}
               <InputText
-                name="city"
+                name="address.city"
                 col={4}
                 handleChange={handleChange}
                 required
-                error={errors.city}
-                value={values.city}
+                disabled={companiesDisableFields}
+                error={errors.address}
+                value={values.address.city}
                 label="Cidade"
               />
-              {/* zipCode */}
+              {/* address.zipCode */}
               <InputText
-                name="zipCode"
+                name="address.zipCode"
                 col={4}
                 handleChange={handleChange}
                 required
-                error={errors.zipCode}
-                value={values.zipCode}
+                disabled={companiesDisableFields}
+                error={errors.address}
+                value={values.address.zipCode}
                 label="CEP"
               />
-              {/* state */}
+              {/* address.state */}
               <InputText
-                name="state"
+                name="address.state"
                 col={4}
                 handleChange={handleChange}
                 required
-                error={errors.state}
-                value={values.state}
+                disabled={companiesDisableFields}
+                error={errors.address}
+                value={values.address.state}
                 label="Estado"
+              />
+              {/* address.country */}
+              <InputText
+                name="address.country"
+                col={4}
+                handleChange={handleChange}
+                required
+                disabled={companiesDisableFields}
+                error={errors.address}
+                value={values.address.country}
+                label="País"
               />
             </Row>
           </Column>
         </Div>
       </Container>
 
-      <Row>
-        <Column col="12">
-          <Button
-            htmlType="submit"
-            className="pull-right btn btn-primary"
-            type="primary"
-            loading={isSubmitting}>
-            Salvar <i className="fa fa-check ml-1"></i>
-          </Button>
-        </Column>
-      </Row>
+      {!companiesDisableFields && (
+        <Row>
+          <Column col="12">
+            <Button
+              htmlType="submit"
+              className="pull-right btn btn-primary"
+              type="primary"
+              loading={isSubmitting}>
+              Salvar <i className="fa fa-check ml-1"></i>
+            </Button>
+          </Column>
+        </Row>
+      )}
 
       <Br />
     </Form>
@@ -153,52 +192,28 @@ function InnerForm({ values, errors, isSubmitting, handleSubmit, handleChange })
 
 const StepOne = withFormik({
   validateOnChange: false,
-  mapPropsToValues: ({
-    corporateName,
-    businessName,
-    registrationNumber,
-    phone,
-    street,
-    secondary,
-    buildingNumber,
-    district,
-    city,
-    state,
-    zipCode,
-  }) => ({
+  mapPropsToValues: ({ corporateName, businessName, registrationNumber, phone, address }) => ({
     corporateName: corporateName || '',
     businessName: businessName || '',
     registrationNumber: registrationNumber || '',
     phone: phone || '',
-    street: street || '',
-    secondary: secondary || '',
-    buildingNumber: buildingNumber || '',
-    district: district || '',
-    city: city || '',
-    state: state || '',
-    zipCode: zipCode || '',
+    address: address || '',
   }),
   validationSchema: Yup.object().shape({
     corporateName: Yup.string().required(Messages.REQUIRED),
     businessName: Yup.string().required(Messages.REQUIRED),
     registrationNumber: Yup.string().required(Messages.REQUIRED),
-    phone: Yup.string().required(Messages.REQUIRED),
-    street: Yup.string().required(Messages.REQUIRED),
-    secondary: Yup.string().required(Messages.REQUIRED),
-    buildingNumber: Yup.string().required(Messages.REQUIRED),
-    district: Yup.string().required(Messages.REQUIRED),
-    city: Yup.string().required(Messages.REQUIRED),
-    state: Yup.string().required(Messages.REQUIRED),
-    zipCode: Yup.string().required(Messages.REQUIRED),
+    phone: Yup.object().required(Messages.REQUIRED),
+    address: Yup.object().required(Messages.REQUIRED),
   }),
 
-  handleSubmit(values, { props, resetForm, setErrors, setSubmitting }) {
-    if (!props.match.params.id) {
-      // props.perfilActions.add(values, resetForm, setErrors, setSubmitting); TODO
-    } else {
-      // props.perfilActions.update(values, resetForm, setErrors, setSubmitting); TODO
-    }
+  handleSubmit(values, { props, setErrors, setSubmitting }) {
+    props.add(values, setErrors, setSubmitting);
   },
 })(InnerForm);
 
-export default StepOne;
+const mapDispatchToProps = {
+  add: addCompany,
+};
+
+export default connect(null, mapDispatchToProps)(StepOne);

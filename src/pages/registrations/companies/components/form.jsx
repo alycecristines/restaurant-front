@@ -1,28 +1,63 @@
 import React, { useEffect, useState } from 'react';
 import { withFormik } from 'formik';
 import { Button } from 'antd';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import * as Yup from 'yup';
+import swal from 'sweetalert';
 
 import { InputText, SelectCode } from '../../../../components/form';
-import { Panel, Row, Column, Form, Br, H3 } from '../../../../components/bootstrap';
+import { Panel, Row, Column, Form, Br } from '../../../../components/bootstrap';
 import Messages from '../../../../helpers/messages';
 import { Container, Div } from './styles';
 import DepartmentGrid from './departmentsGrid';
 import EmployeesGrid from './employeesGrid';
+import { useDispatch, useSelector, connect } from 'react-redux';
+import { getCompanyById, updateCompany } from '../../../../actions/companiesActions';
+import { addDepartment, getAllDepartments } from '../../../../actions/departmentsActions';
+import { addEmployee, getAllEmployees } from '../../../../actions/employeesActions';
 
-const InnerForm = ({ values, errors, isSubmitting, handleSubmit, handleChange, setFieldValue }) => {
+const InnerForm = ({
+  departments,
+  employees,
+  values,
+  errors,
+  isSubmitting,
+  handleSubmit,
+  handleChange,
+  setFieldValue,
+  setValues,
+}) => {
   const [data, setData] = useState({ description: '', name: '', email: '', departmentId: '' });
+  const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   if (this.props.match.params.id) {
-  //     // this.props.perfilActions.get(this.props.match.params.id, this.props.setValues);
-  //     // fazer o getDepartamentos (id e description) pra alimentar o selectCode
-  //   }
-  // }, []);
+  useEffect(() => {
+    let id = window.location.pathname.replace('/companies/edit/', '');
+
+    if (id) {
+      dispatch([getCompanyById(id, setValues), getAllDepartments(), getAllEmployees()]);
+    }
+  }, []);
 
   function handleChange(name, value) {
     setFieldValue(name, value);
+  }
+
+  function handleAddDepartments() {
+    if (data.description == '') {
+      swal('É necessário informar o nome do departamento a ser adicionado', { icon: 'warning' });
+    } else {
+      dispatch(addDepartment(data.description));
+    }
+  }
+
+  function handleAddEmployee() {
+    if (data.name == '' || data.email == '' || data.departmentId == '') {
+      swal('É necessário preencher as informações obrigatórias para adicionar um colaborador', {
+        icon: 'warning',
+      });
+    } else {
+      dispatch(addEmployee(data));
+    }
   }
 
   return (
@@ -45,6 +80,7 @@ const InnerForm = ({ values, errors, isSubmitting, handleSubmit, handleChange, s
                 error={errors.corporateName}
                 value={values.corporateName}
                 label="Razão Social"
+                departments
               />
               {/* businessName */}
               <InputText
@@ -66,85 +102,105 @@ const InnerForm = ({ values, errors, isSubmitting, handleSubmit, handleChange, s
                 value={values.registrationNumber}
                 label="CNPJ"
               />
-              {/* phone */}
+              {/* phone.areaCode */}
               <InputText
-                name="phone"
+                name="phone.areaCode"
                 col={4}
                 handleChange={handleChange}
                 required
                 error={errors.phone}
-                value={values.phone}
+                value={values.phone?.areaCode}
+                label="DDD"
+              />
+              {/* phone.number */}
+              <InputText
+                name="phone.number"
+                col={4}
+                handleChange={handleChange}
+                required
+                error={errors.phone}
+                value={values.phone?.number}
                 label="Telefone"
               />
-              {/* street */}
+              {/* address.street */}
               <InputText
-                name="street"
+                name="address.street"
                 col={4}
                 handleChange={handleChange}
                 required
-                error={errors.street}
-                value={values.street}
+                error={errors.address}
+                value={values.address?.street}
                 label="Logradouro"
               />
-              {/* secondary */}
+              {/* address.secondary */}
               <InputText
-                name="secondary"
+                name="address.secondary"
                 col={4}
                 handleChange={handleChange}
                 required
-                error={errors.secondary}
-                value={values.secondary}
+                error={errors.address}
+                value={values.address?.secondary}
                 label="Complemento"
               />
-              {/* district */}
+              {/* address.district */}
               <InputText
-                name="district"
+                name="address.district"
                 col={4}
                 handleChange={handleChange}
                 required
-                error={errors.district}
-                value={values.district}
+                error={errors.address}
+                value={values.address?.district}
                 label="Setor"
               />
-              {/* buildingNumber */}
+              {/* address.buildingNumber */}
               <InputText
-                name="buildingNumber"
+                name="address.buildingNumber"
                 col={4}
                 handleChange={handleChange}
                 required
-                error={errors.buildingNumber}
-                value={values.buildingNumber}
+                error={errors.address}
+                value={values.address?.buildingNumber}
                 label="Número"
               />
-              {/* city */}
+              {/* address.city */}
               <InputText
-                name="city"
+                name="address.city"
                 col={4}
                 handleChange={handleChange}
                 required
-                error={errors.city}
-                value={values.city}
+                error={errors.address}
+                value={values.address?.city}
                 label="Cidade"
               />
-              {/* zipCode */}
+              {/* address.zipCode */}
               <InputText
-                name="zipCode"
+                name="address.zipCode"
                 col={4}
                 handleChange={handleChange}
                 required
-                error={errors.zipCode}
-                value={values.zipCode}
+                error={errors.address}
+                value={values.address?.zipCode}
                 label="CEP"
               />
-              {/* state */}
+              {/* address.state */}
               <InputText
-                name="state"
+                name="address.state"
                 col={4}
                 handleChange={handleChange}
                 required
-                error={errors.state}
-                value={values.state}
+                error={errors.address}
+                value={values.address?.state}
                 label="Estado"
+              />
+              {/* address.country */}
+              <InputText
+                name="address.country"
+                col={4}
+                handleChange={handleChange}
+                required
+                error={errors.address}
+                value={values.address?.country}
+                label="País"
               />
             </Row>
           </Column>
@@ -179,11 +235,10 @@ const InnerForm = ({ values, errors, isSubmitting, handleSubmit, handleChange, s
             <Button
               style={{ marginTop: 27 }}
               htmlType="button"
-              //onClick={TODO: handleAddDepartment}
+              onClick={() => handleAddDepartments()}
               className="pull-right"
               type="primary"
-              // loading={this.props.colaboradorReducer.loading}
-            >
+              loading={departments.departmentIsLoading}>
               Adicionar
             </Button>
           </Row>
@@ -221,17 +276,16 @@ const InnerForm = ({ values, errors, isSubmitting, handleSubmit, handleChange, s
               required
               value={data.departmentId}
               label="Departamento"
-              dataSource={[{ id: 1, descricao: 'nada' }]} // TODO: alimentar esse dataSource
-              // loading={this.props.produtoReducer.loading}
+              dataSource={departments.departmentRecords}
+              loading={departments.departmentIsLoading}
             />
             <Button
               style={{ marginTop: 27 }}
               htmlType="button"
-              //onClick={TODO: handleAddEmployee}
+              onClick={() => handleAddEmployee()}
               className="pull-right"
               type="primary"
-              // loading={this.props.colaboradorReducer.loading}
-            >
+              loading={employees.employeeIsLoading}>
               Adicionar
             </Button>
           </Row>
@@ -251,6 +305,7 @@ const CompanyForm = withFormik({
     businessName,
     registrationNumber,
     phone,
+    address,
     street,
     secondary,
     buildingNumber,
@@ -263,6 +318,7 @@ const CompanyForm = withFormik({
     businessName: businessName || '',
     registrationNumber: registrationNumber || '',
     phone: phone || '',
+    address: address || '',
     street: street || '',
     secondary: secondary || '',
     buildingNumber: buildingNumber || '',
@@ -275,7 +331,8 @@ const CompanyForm = withFormik({
     corporateName: Yup.string().required(Messages.REQUIRED),
     businessName: Yup.string().required(Messages.REQUIRED),
     registrationNumber: Yup.string().required(Messages.REQUIRED),
-    phone: Yup.string().required(Messages.REQUIRED),
+    phone: Yup.object().required(Messages.REQUIRED),
+    address: Yup.object().required(Messages.REQUIRED),
     street: Yup.string().required(Messages.REQUIRED),
     secondary: Yup.string().required(Messages.REQUIRED),
     buildingNumber: Yup.string().required(Messages.REQUIRED),
@@ -285,13 +342,18 @@ const CompanyForm = withFormik({
     zipCode: Yup.string().required(Messages.REQUIRED),
   }),
 
-  handleSubmit(values, { props, resetForm, setErrors, setSubmitting }) {
-    if (!props.match.params.id) {
-      // props.perfilActions.add(values, resetForm, setErrors, setSubmitting); TODO
-    } else {
-      // props.perfilActions.update(values, resetForm, setErrors, setSubmitting); TODO
-    }
+  handleSubmit(values, { props, setErrors, setSubmitting }) {
+    props.update(props.match.params.id, values, setErrors, setSubmitting);
   },
 })(InnerForm);
 
-export default withRouter(CompanyForm);
+const mapStateToProps = state => ({
+  departments: state.departments,
+  employees: state.employees,
+});
+
+const mapDispatchToProps = {
+  update: updateCompany,
+};
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CompanyForm));

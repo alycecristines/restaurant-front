@@ -7,8 +7,12 @@ import { Row, Column, Form, Br, Panel } from '../../../../components/bootstrap';
 import { InputText, SelectCode } from '../../../../components/form';
 import { Container, Div } from './styles';
 import EmployeesGrid from './employeesGrid';
+import { connect, useSelector } from 'react-redux';
+import { addEmployee } from '../../../../actions/employeesActions';
 
 function InnerForm({ values, errors, isSubmitting, handleSubmit, handleChange }) {
+  const { departmentIsLoading, departmentRecords } = useSelector(state => state.departments);
+
   return (
     <Form handleSubmit={handleSubmit}>
       <Container>
@@ -43,17 +47,15 @@ function InnerForm({ values, errors, isSubmitting, handleSubmit, handleChange })
                     error={errors.departmentId}
                     value={values.departmentId}
                     label="Departamento"
-                    dataSource={[{ id: 1, descricao: 'nada' }]} // TODO: alimentar esse dataSource
-                    // loading={this.props.produtoReducer.loading}
+                    dataSource={departmentRecords}
+                    loading={departmentIsLoading}
                   />
                   <Button
                     style={{ marginTop: 27 }}
-                    htmlType="button"
-                    //onClick={TODO: handleAddEmployee}
+                    htmlType="submit"
                     className="pull-right"
                     type="primary"
-                    // loading={this.props.colaboradorReducer.loading}
-                  >
+                    loading={isSubmitting}>
                     Adicionar
                   </Button>
                 </Row>
@@ -65,18 +67,6 @@ function InnerForm({ values, errors, isSubmitting, handleSubmit, handleChange })
           </Column>
         </Div>
       </Container>
-
-      {/* <Row>
-        <Column col="12">
-          <Button
-            htmlType="submit"
-            className="pull-right btn btn-primary"
-            type="primary"
-            loading={isSubmitting}>
-            Salvar <i className="fa fa-check ml-1"></i>
-          </Button>
-        </Column>
-      </Row> */}
 
       <Br />
     </Form>
@@ -97,12 +87,12 @@ const StepThree = withFormik({
   }),
 
   handleSubmit(values, { props, resetForm, setErrors, setSubmitting }) {
-    if (!props.match.params.id) {
-      // props.perfilActions.add(values, resetForm, setErrors, setSubmitting); TODO
-    } else {
-      // props.perfilActions.update(values, resetForm, setErrors, setSubmitting); TODO
-    }
+    props.add(values, resetForm, setErrors, setSubmitting);
   },
 })(InnerForm);
 
-export default StepThree;
+const mapDispatchToProps = {
+  add: addEmployee,
+};
+
+export default connect(null, mapDispatchToProps)(StepThree);

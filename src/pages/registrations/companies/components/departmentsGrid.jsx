@@ -2,12 +2,17 @@
 import React, { useEffect } from 'react';
 import { Table, Tooltip } from 'antd';
 import { withRouter } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteDepartment, getAllDepartments } from '../../../../actions/departmentsActions';
 
-const DepartmentGrid = () => {
+const DepartmentGrid = props => {
+  const { departmentRecords, departmentIsLoading } = useSelector(state => state.departments);
+  const dispatch = useDispatch();
+
   const departmentColumns = [
     {
       title: 'id',
-      dataIndex: 'Id',
+      dataIndex: 'id',
     },
     {
       title: 'Nome',
@@ -23,7 +28,7 @@ const DepartmentGrid = () => {
           <div>
             <Tooltip title="Excluir">
               <button
-                // onClick={() => this.props.colaboradorAtendimentoActions.delete(record.id)}
+                onClick={() => dispatch(deleteDepartment(record.id))}
                 className="btn-icon-delete">
                 <i className="fa fa-close"></i>
               </button>
@@ -35,21 +40,19 @@ const DepartmentGrid = () => {
   ];
 
   useEffect(() => {
-    // if (this.props.match.params.id) {
-    //   this.props.colaboradorAtendimentoActions.getByColaboradorId( TODO
-    //     this.props.colaboradorReducer.colaboradorDetails.id,
-    //   );
-    // }
+    if (props.match.params.id) {
+      dispatch(getAllDepartments());
+    }
   }, []);
 
   return (
     <div className="panel panel-default">
       <div className="panel-body no-padding">
         <Table
-          // loading={this.props.colaboradorAtendimentoReducer.loading} TODO
+          loading={departmentIsLoading}
           // TODO: Add pagination
           rowKey="id"
-          // dataSource={this.props.colaboradorAtendimentoReducer.records} TODO
+          dataSource={departmentRecords}
           columns={departmentColumns}
         />
       </div>

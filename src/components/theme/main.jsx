@@ -14,7 +14,7 @@ import { correctHeight, detectBody } from './helpers/helpers';
 import { useSelector } from 'react-redux';
 
 const Main = () => {
-  const isLogged = useSelector(state => state.login.isLogged);
+  const { isLogged } = useSelector(state => state.login);
   useEffect(() => {
     $(window).bind('load resize', function () {
       correctHeight();
@@ -22,7 +22,7 @@ const Main = () => {
     });
   }, []);
 
-  if (isLogged)
+  if (isLogged || !!localStorage.getItem('@rest:token'))
     return (
       <div id="wrapper skin-1">
         <Router history={history}>

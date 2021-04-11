@@ -4,15 +4,20 @@ import { Table, Tooltip } from 'antd';
 import { withRouter } from 'react-router-dom';
 import VMasker from 'vanilla-masker';
 import history from '../../../../helpers/history';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteCompany, getAllCompanies } from '../../../../actions/companiesActions';
+import { departmentsSetSearch } from '../../../../actions/departmentsActions';
+import { employeesSetSearch } from '../../../../actions/employeesActions';
 
 const GridCompanies = ({ title }) => {
+  const dispatch = useDispatch();
+  const { companiesIsLoading, companiesRecords } = useSelector(state => state.companies);
+
+  useEffect(() => {
+    dispatch(getAllCompanies());
+  }, []);
+
   const perfilColumns = [
-    {
-      title: 'Código',
-      dataIndex: 'id',
-      width: '10%',
-      align: 'center',
-    },
     {
       title: 'Razão Social',
       dataIndex: 'corporateName',
@@ -36,14 +41,25 @@ const GridCompanies = ({ title }) => {
           <div>
             <Tooltip title="Editar">
               <button
-                onClick={() => history.push(`/companies/edit/${record.id}`)}
+                onClick={() => {
+                  dispatch([
+                    departmentsSetSearch({ description: '', companyId: record.id }),
+                    employeesSetSearch({
+                      name: '',
+                      email: '',
+                      departmentId: '',
+                      companyId: record.id,
+                    }),
+                  ]);
+                  history.push(`/companies/edit/${record.id}`);
+                }}
                 className="btn-icon-edit mr-1">
                 <i className="fa fa-pencil" />
               </button>
             </Tooltip>
             <Tooltip title="Excluir">
               <button
-                // onClick={() => deleteCompany(record.id)} TODO: Adicionar chamada pra deletar
+                onClick={() => dispatch(deleteCompany(record.id))}
                 className="btn-icon-delete">
                 <i className="fa fa-close"></i>
               </button>
@@ -53,10 +69,6 @@ const GridCompanies = ({ title }) => {
       },
     },
   ];
-
-  useEffect(() => {
-    // TODO: Acionar o get all companies getAll(0, 10);
-  }, []);
 
   function onChangePage(page, pageSize) {
     // TODO: adicionar o getAll(page - 1, pageSize);
@@ -79,9 +91,9 @@ const GridCompanies = ({ title }) => {
           //   defaultCurrent: // TODO: adicionar o currentPage do reducer,
           //   total: // TODO: adicionar o totalRecords do reducer,
           // }}
-          // loading={this.props.perfilActions.loading}
+          loading={companiesIsLoading}
           rowKey="id"
-          // dataSource={this.props.perfilReducer.records}
+          dataSource={companiesRecords}
           columns={perfilColumns}
         />
       </div>

@@ -1,25 +1,34 @@
 import React, { useEffect, useState } from 'react';
-import { withFormik } from 'formik';
 import { Button, Steps } from 'antd';
-import { Link, withRouter } from 'react-router-dom';
-import * as Yup from 'yup';
-
-import Messages from '../../../../helpers/messages';
-
-import DepartmentGrid from './departmentsGrid';
-import EmployeesGrid from './employeesGrid';
+import { withRouter } from 'react-router-dom';
 import StepOne from './stepOne';
-import StepTwo from './stepTwo';
 import StepThree from './stepThree';
+import StepTwo from './stepTwo';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  companiesIsDisabledFields,
+  companiesSetNextStep,
+  companiesSetRecord,
+} from '../../../../actions/companiesActions';
+import { departmentsSetSearch } from '../../../../actions/departmentsActions';
 
 const { Step } = Steps;
 
 const AddForm = () => {
   const [current, setCurrent] = useState(0);
-  const [configStep, setConfigStep] = useState({
-    step: 0,
-    done: false,
-  });
+  const { companiesNextStep } = useSelector(state => state.companies);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    return function cleanup() {
+      dispatch([
+        companiesSetRecord({}),
+        departmentsSetSearch({ companyId: '' }),
+        companiesSetNextStep(false),
+        companiesIsDisabledFields(false),
+      ]);
+    };
+  }, []);
 
   function Step1() {
     return <StepOne />;
@@ -65,12 +74,17 @@ const AddForm = () => {
         {steps[current].content()}
       </div>
       <div className="steps-action">
-        {current > 0 && (
+        {current > 1 && (
           <Button style={{ margin: '0 8px' }} onClick={() => prev()}>
             Anterior
           </Button>
         )}
         {current < steps.length - 1 && current !== 0 && (
+          <Button type="primary" onClick={() => next()}>
+            Próximo
+          </Button>
+        )}
+        {current === 0 && companiesNextStep && (
           <Button type="primary" onClick={() => next()}>
             Próximo
           </Button>

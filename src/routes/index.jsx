@@ -42,7 +42,7 @@ const Routes = () => (
     <PrivateRouter exact path="/" component={Dashboard} />
     <PrivateRouter exact path="/companies" component={Companies} />
     <PrivateRouter exact path="/companies/add" component={CompaniesAdd} />
-    <PrivateRouter exact path="/companies/edit" component={CompaniesEdit} />
+    <PrivateRouter exact path="/companies/edit/:id" component={CompaniesEdit} />
   </Switch>
 );
 
