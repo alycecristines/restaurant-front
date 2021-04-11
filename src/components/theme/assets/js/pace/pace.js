@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 //
 // Modified by @casesandberg to work via Node exports
 //
@@ -72,7 +73,7 @@ var AjaxMonitor,
   _replaceState,
   __slice = [].slice,
   __hasProp = {}.hasOwnProperty,
-  __extends = function(child, parent) {
+  __extends = function (child, parent) {
     for (var key in parent) {
       if (__hasProp.call(parent, key)) child[key] = parent[key];
     }
@@ -86,7 +87,7 @@ var AjaxMonitor,
   },
   __indexOf =
     [].indexOf ||
-    function(item) {
+    function (item) {
       for (var i = 0, l = this.length; i < l; i++) {
         if (i in this && this[i] === item) return i;
       }
@@ -103,28 +104,28 @@ defaultOptions = {
   startOnPageLoad: true,
   restartOnPushState: true,
   restartOnRequestAfter: 500,
-  target: "body",
+  target: 'body',
   elements: {
     checkInterval: 100,
-    selectors: ["body"]
+    selectors: ['body'],
   },
   eventLag: {
     minSamples: 10,
     sampleCount: 3,
-    lagThreshold: 3
+    lagThreshold: 3,
   },
   ajax: {
-    trackMethods: ["GET"],
+    trackMethods: ['GET'],
     trackWebSockets: true,
-    ignoreURLs: []
-  }
+    ignoreURLs: [],
+  },
 };
 
-now = function() {
+now = function () {
   var _ref;
   return (_ref =
-    typeof performance !== "undefined" && performance !== null
-      ? typeof performance.now === "function"
+    typeof performance !== 'undefined' && performance !== null
+      ? typeof performance.now === 'function'
         ? performance.now()
         : void 0
       : void 0) != null
@@ -138,27 +139,26 @@ requestAnimationFrame =
   window.webkitRequestAnimationFrame ||
   window.msRequestAnimationFrame;
 
-cancelAnimationFrame =
-  window.cancelAnimationFrame || window.mozCancelAnimationFrame;
+cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame;
 
 if (requestAnimationFrame == null) {
-  requestAnimationFrame = function(fn) {
+  requestAnimationFrame = function (fn) {
     return setTimeout(fn, 50);
   };
-  cancelAnimationFrame = function(id) {
+  cancelAnimationFrame = function (id) {
     return clearTimeout(id);
   };
 }
 
-runAnimation = function(fn) {
+runAnimation = function (fn) {
   var last, tick;
   last = now();
-  tick = function() {
+  tick = function () {
     var diff;
     diff = now() - last;
     if (diff >= 33) {
       last = now();
-      return fn(diff, function() {
+      return fn(diff, function () {
         return requestAnimationFrame(tick);
       });
     } else {
@@ -168,19 +168,19 @@ runAnimation = function(fn) {
   return tick();
 };
 
-result = function() {
+result = function () {
   var args, key, obj;
   obj = arguments[0];
   key = arguments[1];
   args = 3 <= arguments.length ? __slice.call(arguments, 2) : [];
-  if (typeof obj[key] === "function") {
+  if (typeof obj[key] === 'function') {
     return obj[key].apply(obj, args);
   } else {
     return obj[key];
   }
 };
 
-extend = function() {
+extend = function () {
   var key, out, source, sources, val, _i, _len;
   out = arguments[0];
   sources = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
@@ -192,9 +192,9 @@ extend = function() {
         val = source[key];
         if (
           out[key] != null &&
-          typeof out[key] === "object" &&
+          typeof out[key] === 'object' &&
           val != null &&
-          typeof val === "object"
+          typeof val === 'object'
         ) {
           extend(out[key], val);
         } else {
@@ -206,7 +206,7 @@ extend = function() {
   return out;
 };
 
-avgAmplitude = function(arr) {
+avgAmplitude = function (arr) {
   var count, sum, v, _i, _len;
   sum = count = 0;
   for (_i = 0, _len = arr.length; _i < _len; _i++) {
@@ -217,19 +217,19 @@ avgAmplitude = function(arr) {
   return sum / count;
 };
 
-getFromDOM = function(key, json) {
+getFromDOM = function (key, json) {
   var data, e, el;
   if (key == null) {
-    key = "options";
+    key = 'options';
   }
   if (json == null) {
     json = true;
   }
-  el = document.querySelector("[data-pace-" + key + "]");
+  el = document.querySelector('[data-pace-' + key + ']');
   if (!el) {
     return;
   }
-  data = el.getAttribute("data-pace-" + key);
+  data = el.getAttribute('data-pace-' + key);
   if (!json) {
     return data;
   }
@@ -237,16 +237,16 @@ getFromDOM = function(key, json) {
     return JSON.parse(data);
   } catch (_error) {
     e = _error;
-    return typeof console !== "undefined" && console !== null
-      ? console.error("Error parsing inline pace options", e)
+    return typeof console !== 'undefined' && console !== null
+      ? console.error('Error parsing inline pace options', e)
       : void 0;
   }
 };
 
-Evented = (function() {
+Evented = (function () {
   function Evented() {}
 
-  Evented.prototype.on = function(event, handler, ctx, once) {
+  Evented.prototype.on = function (event, handler, ctx, once) {
     var _base;
     if (once == null) {
       once = false;
@@ -260,15 +260,15 @@ Evented = (function() {
     return this.bindings[event].push({
       handler: handler,
       ctx: ctx,
-      once: once
+      once: once,
     });
   };
 
-  Evented.prototype.once = function(event, handler, ctx) {
+  Evented.prototype.once = function (event, handler, ctx) {
     return this.on(event, handler, ctx, true);
   };
 
-  Evented.prototype.off = function(event, handler) {
+  Evented.prototype.off = function (event, handler) {
     var i, _ref, _results;
     if (((_ref = this.bindings) != null ? _ref[event] : void 0) == null) {
       return;
@@ -289,7 +289,7 @@ Evented = (function() {
     }
   };
 
-  Evented.prototype.trigger = function() {
+  Evented.prototype.trigger = function () {
     var args, ctx, event, handler, i, once, _ref, _ref1, _results;
     event = arguments[0];
     args = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
@@ -321,14 +321,9 @@ Pace = {}; // window.Pace || {};
 
 extend(Pace, Evented.prototype);
 
-options = Pace.options = extend(
-  {},
-  defaultOptions,
-  window.paceOptions,
-  getFromDOM()
-);
+options = Pace.options = extend({}, defaultOptions, window.paceOptions, getFromDOM());
 
-_ref = ["ajax", "document", "eventLag", "elements"];
+_ref = ['ajax', 'document', 'eventLag', 'elements'];
 for (_i = 0, _len = _ref.length; _i < _len; _i++) {
   source = _ref[_i];
   if (options[source] === true) {
@@ -336,7 +331,7 @@ for (_i = 0, _len = _ref.length; _i < _len; _i++) {
   }
 }
 
-NoTargetError = (function(_super) {
+NoTargetError = (function (_super) {
   __extends(NoTargetError, _super);
 
   function NoTargetError() {
@@ -347,25 +342,22 @@ NoTargetError = (function(_super) {
   return NoTargetError;
 })(Error);
 
-Bar = (function() {
+Bar = (function () {
   function Bar() {
     this.progress = 0;
   }
 
-  Bar.prototype.getElement = function() {
+  Bar.prototype.getElement = function () {
     var targetElement;
     if (this.el == null) {
       targetElement = document.querySelector(options.target);
       if (!targetElement) {
         throw new NoTargetError();
       }
-      this.el = document.createElement("div");
-      this.el.className = "pace pace-active";
-      document.body.className = document.body.className.replace(
-        /pace-done/g,
-        ""
-      );
-      document.body.className += " pace-running";
+      this.el = document.createElement('div');
+      this.el.className = 'pace pace-active';
+      document.body.className = document.body.className.replace(/pace-done/g, '');
+      document.body.className += ' pace-running';
       this.el.innerHTML =
         '<div class="pace-progress">\n  <div class="pace-progress-inner"></div>\n</div>\n<div class="pace-activity"></div>';
       if (targetElement.firstChild != null) {
@@ -377,24 +369,21 @@ Bar = (function() {
     return this.el;
   };
 
-  Bar.prototype.finish = function() {
+  Bar.prototype.finish = function () {
     var el;
     el = this.getElement();
-    el.className = el.className.replace("pace-active", "");
-    el.className += " pace-inactive";
-    document.body.className = document.body.className.replace(
-      "pace-running",
-      ""
-    );
-    return (document.body.className += " pace-done");
+    el.className = el.className.replace('pace-active', '');
+    el.className += ' pace-inactive';
+    document.body.className = document.body.className.replace('pace-running', '');
+    return (document.body.className += ' pace-done');
   };
 
-  Bar.prototype.update = function(prog) {
+  Bar.prototype.update = function (prog) {
     this.progress = prog;
     return this.render();
   };
 
-  Bar.prototype.destroy = function() {
+  Bar.prototype.destroy = function () {
     try {
       this.getElement().parentNode.removeChild(this.getElement());
     } catch (_error) {
@@ -403,50 +392,44 @@ Bar = (function() {
     return (this.el = void 0);
   };
 
-  Bar.prototype.render = function() {
+  Bar.prototype.render = function () {
     var el, key, progressStr, transform, _j, _len1, _ref2;
     if (document.querySelector(options.target) == null) {
       return false;
     }
     el = this.getElement();
-    transform = "translate3d(" + this.progress + "%, 0, 0)";
-    _ref2 = ["webkitTransform", "msTransform", "transform"];
+    transform = 'translate3d(' + this.progress + '%, 0, 0)';
+    _ref2 = ['webkitTransform', 'msTransform', 'transform'];
     for (_j = 0, _len1 = _ref2.length; _j < _len1; _j++) {
       key = _ref2[_j];
       el.children[0].style[key] = transform;
     }
-    if (
-      !this.lastRenderedProgress ||
-      this.lastRenderedProgress | (0 !== this.progress) | 0
-    ) {
-      el.children[0].setAttribute(
-        "data-progress-text",
-        "" + (this.progress | 0) + "%"
-      );
+    if (!this.lastRenderedProgress || this.lastRenderedProgress | (0 !== this.progress) | 0) {
+      el.children[0].setAttribute('data-progress-text', '' + (this.progress | 0) + '%');
       if (this.progress >= 100) {
-        progressStr = "99";
+        progressStr = '99';
       } else {
-        progressStr = this.progress < 10 ? "0" : "";
+        progressStr = this.progress < 10 ? '0' : '';
         progressStr += this.progress | 0;
       }
-      el.children[0].setAttribute("data-progress", "" + progressStr);
+      el.children[0].setAttribute('data-progress', '' + progressStr);
     }
     return (this.lastRenderedProgress = this.progress);
   };
 
-  Bar.prototype.done = function() {
+  Bar.prototype.done = function () {
     return this.progress >= 100;
   };
 
   return Bar;
 })();
 
-Events = (function() {
+Events = (function () {
   function Events() {
     this.bindings = {};
   }
 
-  Events.prototype.trigger = function(name, val) {
+  Events.prototype.trigger = function (name, val) {
     var binding, _j, _len1, _ref2, _results;
     if (this.bindings[name] != null) {
       _ref2 = this.bindings[name];
@@ -459,7 +442,7 @@ Events = (function() {
     }
   };
 
-  Events.prototype.on = function(name, fn) {
+  Events.prototype.on = function (name, fn) {
     var _base;
     if ((_base = this.bindings)[name] == null) {
       _base[name] = [];
@@ -476,21 +459,21 @@ _XDomainRequest = window.XDomainRequest;
 
 _WebSocket = window.WebSocket;
 
-extendNative = function(to, from) {
+extendNative = function (to, from) {
   var key, _results;
   _results = [];
   from.prototype.forEach(() => {
     try {
-      if (to[key] == null && typeof from[key] !== "function") {
-        if (typeof Object.defineProperty === "function") {
+      if (to[key] == null && typeof from[key] !== 'function') {
+        if (typeof Object.defineProperty === 'function') {
           _results.push(
             Object.defineProperty(to, key, {
-              get: function() {
+              get: function () {
                 return from.prototype[key];
               },
               configurable: true,
-              enumerable: true
-            })
+              enumerable: true,
+            }),
           );
         } else {
           _results.push((to[key] = from.prototype[key]));
@@ -505,40 +488,39 @@ extendNative = function(to, from) {
 
 ignoreStack = [];
 
-Pace.ignore = function() {
+Pace.ignore = function () {
   var args, fn, ret;
   fn = arguments[0];
   args = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
-  ignoreStack.unshift("ignore");
+  ignoreStack.unshift('ignore');
   ret = fn.apply(null, args);
   ignoreStack.shift();
   return ret;
 };
 
-Pace.track = function() {
+Pace.track = function () {
   var args, fn, ret;
   fn = arguments[0];
   args = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
-  ignoreStack.unshift("track");
+  ignoreStack.unshift('track');
   ret = fn.apply(null, args);
   ignoreStack.shift();
   return ret;
 };
 
-shouldTrack = function(method) {
+shouldTrack = function (method) {
   var _ref2;
   if (method == null) {
-    method = "GET";
+    method = 'GET';
   }
-  if (ignoreStack[0] === "track") {
-    return "force";
+  if (ignoreStack[0] === 'track') {
+    return 'force';
   }
   if (!ignoreStack.length && options.ajax) {
-    if (method === "socket" && options.ajax.trackWebSockets) {
+    if (method === 'socket' && options.ajax.trackWebSockets) {
       return true;
     } else if (
-      ((_ref2 = method.toUpperCase()),
-      __indexOf.call(options.ajax.trackMethods, _ref2) >= 0)
+      ((_ref2 = method.toUpperCase()), __indexOf.call(options.ajax.trackMethods, _ref2) >= 0)
     ) {
       return true;
     }
@@ -546,28 +528,28 @@ shouldTrack = function(method) {
   return false;
 };
 
-RequestIntercept = (function(_super) {
+RequestIntercept = (function (_super) {
   __extends(RequestIntercept, _super);
 
   function RequestIntercept() {
     var monitorXHR,
       _this = this;
     RequestIntercept.__super__.constructor.apply(this, arguments);
-    monitorXHR = function(req) {
+    monitorXHR = function (req) {
       var _open;
       _open = req.open;
-      return (req.open = function(type, url, async) {
+      return (req.open = function (type, url, async) {
         if (shouldTrack(type)) {
-          _this.trigger("request", {
+          _this.trigger('request', {
             type: type,
             url: url,
-            request: req
+            request: req,
           });
         }
         return _open.apply(req, arguments);
       });
     };
-    window.XMLHttpRequest = function(flags) {
+    window.XMLHttpRequest = function (flags) {
       var req;
       req = new _XMLHttpRequest(flags);
       monitorXHR(req);
@@ -577,7 +559,7 @@ RequestIntercept = (function(_super) {
       extendNative(window.XMLHttpRequest, _XMLHttpRequest);
     } catch (_error) {}
     if (_XDomainRequest != null) {
-      window.XDomainRequest = function() {
+      window.XDomainRequest = function () {
         var req;
         req = new _XDomainRequest();
         monitorXHR(req);
@@ -588,19 +570,19 @@ RequestIntercept = (function(_super) {
       } catch (_error) {}
     }
     if (_WebSocket != null && options.ajax.trackWebSockets) {
-      window.WebSocket = function(url, protocols) {
+      window.WebSocket = function (url, protocols) {
         var req;
         if (protocols != null) {
           req = new _WebSocket(url, protocols);
         } else {
           req = new _WebSocket(url);
         }
-        if (shouldTrack("socket")) {
-          _this.trigger("request", {
-            type: "socket",
+        if (shouldTrack('socket')) {
+          _this.trigger('request', {
+            type: 'socket',
             url: url,
             protocols: protocols,
-            request: req
+            request: req,
           });
         }
         return req;
@@ -616,19 +598,19 @@ RequestIntercept = (function(_super) {
 
 _intercept = null;
 
-getIntercept = function() {
+getIntercept = function () {
   if (_intercept == null) {
     _intercept = new RequestIntercept();
   }
   return _intercept;
 };
 
-shouldIgnoreURL = function(url) {
+shouldIgnoreURL = function (url) {
   var pattern, _j, _len1, _ref2;
   _ref2 = options.ajax.ignoreURLs;
   for (_j = 0, _len1 = _ref2.length; _j < _len1; _j++) {
     pattern = _ref2[_j];
-    if (typeof pattern === "string") {
+    if (typeof pattern === 'string') {
       if (url.indexOf(pattern) !== -1) {
         return true;
       }
@@ -641,7 +623,7 @@ shouldIgnoreURL = function(url) {
   return false;
 };
 
-getIntercept().on("request", function(_arg) {
+getIntercept().on('request', function (_arg) {
   var after, args, request, type, url;
   type = _arg.type;
   request = _arg.request;
@@ -649,18 +631,15 @@ getIntercept().on("request", function(_arg) {
   if (shouldIgnoreURL(url)) {
     return;
   }
-  if (
-    !Pace.running &&
-    (options.restartOnRequestAfter !== false || shouldTrack(type) === "force")
-  ) {
+  if (!Pace.running && (options.restartOnRequestAfter !== false || shouldTrack(type) === 'force')) {
     args = arguments;
     after = options.restartOnRequestAfter || 0;
-    if (typeof after === "boolean") {
+    if (typeof after === 'boolean') {
       after = 0;
     }
-    return setTimeout(function() {
+    return setTimeout(function () {
       var stillActive, _j, _len1, _ref2, _ref3, _results;
-      if (type === "socket") {
+      if (type === 'socket') {
         stillActive = request.readyState < 2;
       } else {
         stillActive = 0 < (_ref2 = request.readyState) && _ref2 < 4;
@@ -684,16 +663,16 @@ getIntercept().on("request", function(_arg) {
   }
 });
 
-AjaxMonitor = (function() {
+AjaxMonitor = (function () {
   function AjaxMonitor() {
     var _this = this;
     this.elements = [];
-    getIntercept().on("request", function() {
+    getIntercept().on('request', function () {
       return _this.watch.apply(_this, arguments);
     });
   }
 
-  AjaxMonitor.prototype.watch = function(_arg) {
+  AjaxMonitor.prototype.watch = function (_arg) {
     var request, tracker, type, url;
     type = _arg.type;
     request = _arg.request;
@@ -701,7 +680,7 @@ AjaxMonitor = (function() {
     if (shouldIgnoreURL(url)) {
       return;
     }
-    if (type === "socket") {
+    if (type === 'socket') {
       tracker = new SocketRequestTracker(request);
     } else {
       tracker = new XHRRequestTracker(request);
@@ -712,7 +691,7 @@ AjaxMonitor = (function() {
   return AjaxMonitor;
 })();
 
-XHRRequestTracker = (function() {
+XHRRequestTracker = (function () {
   function XHRRequestTracker(request) {
     var event,
       _j,
@@ -723,38 +702,37 @@ XHRRequestTracker = (function() {
     this.progress = 0;
     if (window.ProgressEvent != null) {
       request.addEventListener(
-        "progress",
-        function(evt) {
+        'progress',
+        function (evt) {
           if (evt.lengthComputable) {
             return (_this.progress = (100 * evt.loaded) / evt.total);
           } else {
-            return (_this.progress =
-              _this.progress + (100 - _this.progress) / 2);
+            return (_this.progress = _this.progress + (100 - _this.progress) / 2);
           }
         },
-        false
+        false,
       );
-      _ref2 = ["load", "abort", "timeout", "error"];
+      _ref2 = ['load', 'abort', 'timeout', 'error'];
       for (_j = 0, _len1 = _ref2.length; _j < _len1; _j++) {
         event = _ref2[_j];
         request.addEventListener(
           event,
-          function() {
+          function () {
             return (_this.progress = 100);
           },
-          false
+          false,
         );
       }
     } else {
       _onreadystatechange = request.onreadystatechange;
-      request.onreadystatechange = function() {
+      request.onreadystatechange = function () {
         var _ref3;
         if ((_ref3 = request.readyState) === 0 || _ref3 === 4) {
           _this.progress = 100;
         } else if (request.readyState === 3) {
           _this.progress = 50;
         }
-        return typeof _onreadystatechange === "function"
+        return typeof _onreadystatechange === 'function'
           ? _onreadystatechange.apply(null, arguments)
           : void 0;
       };
@@ -764,7 +742,7 @@ XHRRequestTracker = (function() {
   return XHRRequestTracker;
 })();
 
-SocketRequestTracker = (function() {
+SocketRequestTracker = (function () {
   function SocketRequestTracker(request) {
     var event,
       _j,
@@ -772,15 +750,15 @@ SocketRequestTracker = (function() {
       _ref2,
       _this = this;
     this.progress = 0;
-    _ref2 = ["error", "open"];
+    _ref2 = ['error', 'open'];
     for (_j = 0, _len1 = _ref2.length; _j < _len1; _j++) {
       event = _ref2[_j];
       request.addEventListener(
         event,
-        function() {
+        function () {
           return (_this.progress = 100);
         },
-        false
+        false,
       );
     }
   }
@@ -788,7 +766,7 @@ SocketRequestTracker = (function() {
   return SocketRequestTracker;
 })();
 
-ElementMonitor = (function() {
+ElementMonitor = (function () {
   function ElementMonitor(options) {
     var selector, _j, _len1, _ref2;
     if (options == null) {
@@ -808,50 +786,49 @@ ElementMonitor = (function() {
   return ElementMonitor;
 })();
 
-ElementTracker = (function() {
+ElementTracker = (function () {
   function ElementTracker(selector) {
     this.selector = selector;
     this.progress = 0;
     this.check();
   }
 
-  ElementTracker.prototype.check = function() {
+  ElementTracker.prototype.check = function () {
     var _this = this;
     if (document.querySelector(this.selector)) {
       return this.done();
     } else {
-      return setTimeout(function() {
+      return setTimeout(function () {
         return _this.check();
       }, options.elements.checkInterval);
     }
   };
 
-  ElementTracker.prototype.done = function() {
+  ElementTracker.prototype.done = function () {
     return (this.progress = 100);
   };
 
   return ElementTracker;
 })();
 
-DocumentMonitor = (function() {
+DocumentMonitor = (function () {
   DocumentMonitor.prototype.states = {
     loading: 0,
     interactive: 50,
-    complete: 100
+    complete: 100,
   };
 
   function DocumentMonitor() {
     var _onreadystatechange,
       _ref2,
       _this = this;
-    this.progress =
-      (_ref2 = this.states[document.readyState]) != null ? _ref2 : 100;
+    this.progress = (_ref2 = this.states[document.readyState]) != null ? _ref2 : 100;
     _onreadystatechange = document.onreadystatechange;
-    document.onreadystatechange = function() {
+    document.onreadystatechange = function () {
       if (_this.states[document.readyState] != null) {
         _this.progress = _this.states[document.readyState];
       }
-      return typeof _onreadystatechange === "function"
+      return typeof _onreadystatechange === 'function'
         ? _onreadystatechange.apply(null, arguments)
         : void 0;
     };
@@ -860,7 +837,7 @@ DocumentMonitor = (function() {
   return DocumentMonitor;
 })();
 
-EventLagMonitor = (function() {
+EventLagMonitor = (function () {
   function EventLagMonitor() {
     var avg,
       interval,
@@ -873,7 +850,7 @@ EventLagMonitor = (function() {
     samples = [];
     points = 0;
     last = now();
-    interval = setInterval(function() {
+    interval = setInterval(function () {
       var diff;
       diff = now() - last - 50;
       last = now();
@@ -882,10 +859,7 @@ EventLagMonitor = (function() {
         samples.shift();
       }
       avg = avgAmplitude(samples);
-      if (
-        ++points >= options.eventLag.minSamples &&
-        avg < options.eventLag.lagThreshold
-      ) {
+      if (++points >= options.eventLag.minSamples && avg < options.eventLag.lagThreshold) {
         _this.progress = 100;
         return clearInterval(interval);
       } else {
@@ -897,7 +871,7 @@ EventLagMonitor = (function() {
   return EventLagMonitor;
 })();
 
-Scaler = (function() {
+Scaler = (function () {
   function Scaler(source) {
     this.source = source;
     this.last = this.sinceLastUpdate = 0;
@@ -905,14 +879,14 @@ Scaler = (function() {
     this.catchup = 0;
     this.progress = this.lastProgress = 0;
     if (this.source != null) {
-      this.progress = result(this.source, "progress");
+      this.progress = result(this.source, 'progress');
     }
   }
 
-  Scaler.prototype.tick = function(frameTime, val) {
+  Scaler.prototype.tick = function (frameTime, val) {
     var scaling;
     if (val == null) {
-      val = result(this.source, "progress");
+      val = result(this.source, 'progress');
     }
     if (val >= 100) {
       this.done = true;
@@ -932,10 +906,7 @@ Scaler = (function() {
     }
     scaling = 1 - Math.pow(this.progress / 100, options.easeFactor);
     this.progress += scaling * this.rate * frameTime;
-    this.progress = Math.min(
-      this.lastProgress + options.maxProgressPerFrame,
-      this.progress
-    );
+    this.progress = Math.min(this.lastProgress + options.maxProgressPerFrame, this.progress);
     this.progress = Math.max(0, this.progress);
     this.progress = Math.min(100, this.progress);
     this.lastProgress = this.progress;
@@ -959,7 +930,7 @@ cancelAnimation = null;
 
 Pace.running = false;
 
-handlePushState = function() {
+handlePushState = function () {
   if (options.restartOnPushState) {
     return Pace.restart();
   }
@@ -967,7 +938,7 @@ handlePushState = function() {
 
 if (window.history.pushState != null) {
   _pushState = window.history.pushState;
-  window.history.pushState = function() {
+  window.history.pushState = function () {
     handlePushState();
     return _pushState.apply(window.history, arguments);
   };
@@ -975,7 +946,7 @@ if (window.history.pushState != null) {
 
 if (window.history.replaceState != null) {
   _replaceState = window.history.replaceState;
-  window.history.replaceState = function() {
+  window.history.replaceState = function () {
     handlePushState();
     return _replaceState.apply(window.history, arguments);
   };
@@ -985,13 +956,13 @@ SOURCE_KEYS = {
   ajax: AjaxMonitor,
   elements: ElementMonitor,
   document: DocumentMonitor,
-  eventLag: EventLagMonitor
+  eventLag: EventLagMonitor,
 };
 
-(init = function() {
+(init = function () {
   var type, _j, _k, _len1, _len2, _ref2, _ref3, _ref4;
   Pace.sources = sources = [];
-  _ref2 = ["ajax", "elements", "document", "eventLag"];
+  _ref2 = ['ajax', 'elements', 'document', 'eventLag'];
   for (_j = 0, _len1 = _ref2.length; _j < _len1; _j++) {
     type = _ref2[_j];
     if (options[type] !== false) {
@@ -1008,13 +979,13 @@ SOURCE_KEYS = {
   return (uniScaler = new Scaler());
 })();
 
-Pace.stop = function() {
-  Pace.trigger("stop");
+Pace.stop = function () {
+  Pace.trigger('stop');
   Pace.running = false;
   bar.destroy();
   cancelAnimation = true;
   if (animation != null) {
-    if (typeof cancelAnimationFrame === "function") {
+    if (typeof cancelAnimationFrame === 'function') {
       cancelAnimationFrame(animation);
     }
     animation = null;
@@ -1022,19 +993,19 @@ Pace.stop = function() {
   return init();
 };
 
-Pace.restart = function() {
-  Pace.trigger("restart");
+Pace.restart = function () {
+  Pace.trigger('restart');
   Pace.stop();
   return Pace.start();
 };
 
-Pace.go = function() {
+Pace.go = function () {
   var start;
   Pace.running = true;
   bar.render();
   start = now();
   cancelAnimation = false;
-  return (animation = runAnimation(function(frameTime, enqueueNextFrame) {
+  return (animation = runAnimation(function (frameTime, enqueueNextFrame) {
     var avg,
       count,
       done,
@@ -1058,10 +1029,7 @@ Pace.go = function() {
       elements = (_ref2 = source.elements) != null ? _ref2 : [source];
       for (j = _k = 0, _len2 = elements.length; _k < _len2; j = ++_k) {
         element = elements[j];
-        scaler =
-          scalerList[j] != null
-            ? scalerList[j]
-            : (scalerList[j] = new Scaler(element));
+        scaler = scalerList[j] != null ? scalerList[j] : (scalerList[j] = new Scaler(element));
         done &= scaler.done;
         if (scaler.done) {
           continue;
@@ -1074,22 +1042,19 @@ Pace.go = function() {
     bar.update(uniScaler.tick(frameTime, avg));
     if (bar.done() || done || cancelAnimation) {
       bar.update(100);
-      Pace.trigger("done");
-      return setTimeout(function() {
+      Pace.trigger('done');
+      return setTimeout(function () {
         bar.finish();
         Pace.running = false;
-        return Pace.trigger("hide");
-      }, Math.max(
-        options.ghostTime,
-        Math.max(options.minTime - (now() - start), 0)
-      ));
+        return Pace.trigger('hide');
+      }, Math.max(options.ghostTime, Math.max(options.minTime - (now() - start), 0)));
     } else {
       return enqueueNextFrame();
     }
   }));
 };
 
-Pace.start = function(_options) {
+Pace.start = function (_options) {
   extend(options, _options);
   Pace.running = true;
   try {
@@ -1097,10 +1062,10 @@ Pace.start = function(_options) {
   } catch (_error) {
     NoTargetError = _error;
   }
-  if (!document.querySelector(".pace")) {
+  if (!document.querySelector('.pace')) {
     return setTimeout(Pace.start, 50);
   } else {
-    Pace.trigger("start");
+    Pace.trigger('start');
     return Pace.go();
   }
 };

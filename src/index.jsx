@@ -12,13 +12,11 @@ import store from './store';
 import 'moment/locale/pt-br';
 
 ReactDOM.render(
-  <React.Fragment>
-    <ConfigProvider locale={ptBR}>
-      <Provider store={store}>
-        <Main />
-      </Provider>
-    </ConfigProvider>
-  </React.Fragment>,
+  <ConfigProvider locale={ptBR}>
+    <Provider store={store}>
+      <Main />
+    </Provider>
+  </ConfigProvider>,
   document.getElementById('root'),
 );
 

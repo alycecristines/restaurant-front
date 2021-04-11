@@ -1,7 +1,9 @@
 import { Button, notification } from 'antd';
 import $ from 'jquery';
 import React, { Component } from 'react';
+import { logOutUser } from '../../actions/loginActions';
 import { smoothlyMenu } from './helpers/helpers';
+import { connect } from 'react-redux';
 
 class TopHeader extends Component {
   toggleNavigation(e) {
@@ -17,6 +19,7 @@ class TopHeader extends Component {
         className="btn btn-primary"
         type="primary"
         onClick={() => {
+          this.props.logoutAction();
           notification.close(key);
         }}>
         Sim, eu tenho certeza!
@@ -39,7 +42,7 @@ class TopHeader extends Component {
           <div className="navbar-header">
             <a
               className="navbar-minimalize minimalize-styl-2 menu-btn"
-              onClick={(e) => this.toggleNavigation(e)}
+              onClick={e => this.toggleNavigation(e)}
               href={hrefLink}>
               <i className="fa fa-bars" />{' '}
             </a>
@@ -57,4 +60,8 @@ class TopHeader extends Component {
   }
 }
 
-export default TopHeader;
+const mapDispatchToProps = {
+  logoutAction: logOutUser,
+};
+
+export default connect(null, mapDispatchToProps)(TopHeader);

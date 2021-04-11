@@ -11,8 +11,10 @@ import Footer from './footer';
 
 import './assets/dependencies';
 import { correctHeight, detectBody } from './helpers/helpers';
+import { useSelector } from 'react-redux';
 
 const Main = () => {
+  const { isLogged } = useSelector(state => state.login);
   useEffect(() => {
     $(window).bind('load resize', function () {
       correctHeight();
@@ -20,31 +22,30 @@ const Main = () => {
     });
   }, []);
 
-  // if (loginReducer.logged) { TODO: Adicionar validação para usuario logado
-  return (
-    <div id="wrapper skin-1">
-      <Router history={history}>
-        <div>
-          <Progress />
-          <Navigation />
-          <div id="page-wrapper" className="gray-bg">
-            <TopHeader />
-            <Routes />
-            <Footer />
+  if (isLogged || !!localStorage.getItem('@rest:token'))
+    return (
+      <div id="wrapper skin-1">
+        <Router history={history}>
+          <div>
+            <Progress />
+            <Navigation />
+            <div id="page-wrapper" className="gray-bg">
+              <TopHeader />
+              <Routes />
+              <Footer />
+            </div>
           </div>
-        </div>
+        </Router>
+      </div>
+    );
+
+  return (
+    <div className="bg-login skin-1">
+      <Router history={history}>
+        <Routes />
       </Router>
     </div>
   );
-  // }
-
-  // return (
-  //   <div className="bg-login skin-1">
-  //     <Router history={history}>
-  //       <Routes />
-  //     </Router>
-  //   </div>
-  // );
 };
 
 export default Main;
