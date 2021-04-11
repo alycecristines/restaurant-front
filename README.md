@@ -4,8 +4,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Necessary tools for run the app
 
-[x] Node.js - In case you needed you can download it [here](https://nodejs.org/en/)
-[x] Yarn - In case you wanna use yarn intead of npm you can just add it by running `npm install -g yarn` on your console
+- [x] Node.js - In case you needed you can download it [here](https://nodejs.org/en/)
+- [x] Yarn - In case you wanna use yarn intead of npm you can just add it by running `npm install -g yarn` on your console
 
 ## Instaling dependencies for the project
 
