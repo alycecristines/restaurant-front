@@ -40,7 +40,7 @@ class Navigation extends Component {
             <MenuItem path="/" icon="home" label="Dashboard" />
             <MenuTree icon="folder" label="Cadastros">
               <MenuItem path="/companies" label="Empresas" />
-              {/* <MenuItem path="/products" label="Produtos" /> */}
+              <MenuItem path="/products" label="Produtos" />
             </MenuTree>
             {/* <MenuItem path="/orders" icon="list" label="Pedidos" />
             <MenuItem path="/reports" icon="pie-chart" label="Relatórios" />
