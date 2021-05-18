@@ -485,7 +485,7 @@ a:hover {
 .swal-button:focus,
 .swal-button.active {
   border-color: #be7e1e;
-  background-color: #ffffff !important;
+  background-color: #2f4050 !important;
   color: #ffffff;
 }
 .swal-button--cancel {

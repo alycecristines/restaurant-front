@@ -32,9 +32,9 @@ const InnerForm = ({
 }) => {
   const [data, setData] = useState({ description: '' });
   const dispatch = useDispatch();
+  const productId = window.location.pathname.replace('/products/edit/', '');
 
   useEffect(() => {
-    let productId = window.location.pathname.replace('/products/edit/', '');
     if (productId) {
       dispatch(getProductById(productId, setValues));
     }
@@ -51,7 +51,7 @@ const InnerForm = ({
     if (data.description == '') {
       swal('É necessário informar o nome da variação a ser adicionada', { icon: 'warning' });
     } else {
-      dispatch(addVariation(data.description));
+      dispatch(addVariation(data.description, productId));
     }
   }
 

@@ -5,6 +5,7 @@ import CompaniesReducer from './companiesReducer';
 import DepartmentsReducer from './departmentsReducer';
 import EmployeesReducer from './employeesReducer';
 import ProductsReducer from './productsReducer';
+import VariationsReducer from './variationsReducer';
 
 const reducers = combineReducers({
   login: LoginReducer,
@@ -12,6 +13,7 @@ const reducers = combineReducers({
   departments: DepartmentsReducer,
   employees: EmployeesReducer,
   products: ProductsReducer,
+  variations: VariationsReducer,
 });
 
 export default reducers;

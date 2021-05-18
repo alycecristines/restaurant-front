@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-// import Form from './form';
+import Form from './form';
 import Header from '../../../../components/theme/header';
 
 const Edit = () => (
@@ -14,7 +14,7 @@ const Edit = () => (
     <div className="wrapper wrapper-content">
       <div className="row">
         <div className="col-md-12">
-          {/* <Form /> */}
+          <Form />
         </div>
       </div>
     </div>

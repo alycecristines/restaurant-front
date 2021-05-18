@@ -74,12 +74,12 @@ export const getVariationById = (id, setValues) => dispatch => {
     });
 };
 
-export const addVariation = (values, resetForm, setErrors, setSubmitting) => dispatch => {
-  dispatch([variationsSetIsLoading(true), setSubmitting(true)]);
+export const addVariation = (description, productId) => dispatch => {
+  dispatch(variationsSetIsLoading(true));
 
   const data = {
-    description: values.description,
-    productId: values.productId,
+    description: description,
+    productId: productId,
   };
 
   api
@@ -90,12 +90,7 @@ export const addVariation = (values, resetForm, setErrors, setSubmitting) => dis
         description: 'Adicionado com sucesso.',
       });
 
-      dispatch([
-        getAllVariations(values.productId),
-        resetForm(),
-        setSubmitting(false),
-        variationsSetIsLoading(false),
-      ]);
+      dispatch(getAllVariations(productId));
     })
     .catch(ex => {
       ex && setErrors(ex.errors);
@@ -105,7 +100,7 @@ export const addVariation = (values, resetForm, setErrors, setSubmitting) => dis
         description: 'Houve um erro ao tentar adicionar a variação.',
       });
 
-      dispatch([variationsSetIsLoading(false), setSubmitting(false)]);
+      dispatch(variationsSetIsLoading(false));
     });
 };
 

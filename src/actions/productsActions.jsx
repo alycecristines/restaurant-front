@@ -118,7 +118,7 @@ export const updateProduct = (id, values, setErrors, setSubmitting) => dispatch 
         message: 'Produto',
         description: 'atualizado com sucesso.',
       });
-      dispatch([setSubmitting(false), productsSetIsLoading(false), getProductById(id)]);
+      dispatch([setSubmitting(false), productsSetIsLoading(false), getProductById(id, () => {})]);
     })
     .catch(ex => {
       ex && setErrors(ex.errors);
