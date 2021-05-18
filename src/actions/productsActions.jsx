@@ -2,6 +2,7 @@ import * as Types from '../utils/actionTypes';
 import api from '../services/api';
 import { notification } from 'antd';
 import swal from 'sweetalert';
+import { variationsSetSearch } from './variationsActions';
 
 export const productsSetIsLoading = bool => {
   return {
@@ -38,6 +39,20 @@ export const productsSetSearch = value => {
   };
 };
 
+export const productsSetNextStep = value => {
+  return {
+    type: Types.PRODUCTS_NEXT_STEP,
+    payload: value,
+  };
+};
+
+export const productsIsDisabledFields = value => {
+  return {
+    type: Types.PRODUCTS_DISABLE_FIELDS,
+    payload: value,
+  };
+};
+
 export const getAllProducts = () => (dispatch, getState) => {
   dispatch(productsSetIsLoading(true));
 
@@ -58,7 +73,7 @@ export const getAllProducts = () => (dispatch, getState) => {
 };
 
 export const getProductById = (id, setValues) => dispatch => {
-  dispatch(productsSetIsLoading(true));
+  dispatch([productsSetIsLoading(true), variationsSetSearch({ description: '', productId: id })]);
 
   api
     .get(`/products/${id}`)
@@ -74,8 +89,8 @@ export const getProductById = (id, setValues) => dispatch => {
     });
 };
 
-export const addProduct = (values, resetForm, setErrors, setSubmitting) => dispatch => {
-  dispatch([productsSetIsLoading(true), setSubmitting(true), getAllProducts()]);
+export const addProduct = (values, setErrors, setSubmitting) => dispatch => {
+  dispatch([productsSetIsLoading(true), setSubmitting(true)]);
 
   const data = {
     description: values.description,
@@ -83,17 +98,18 @@ export const addProduct = (values, resetForm, setErrors, setSubmitting) => dispa
 
   api
     .post('/products', data)
-    .then(() => {
+    .then(response => {
       notification['success']({
         message: 'Produto',
         description: 'Adicionado com sucesso.',
       });
 
       dispatch([
-        resetForm(),
+        variationsSetSearch({ description: '', productId: response?.data?.data?.id }),
+        productsSetNextStep(true),
+        productsIsDisabledFields(true),
         setSubmitting(false),
         productsSetIsLoading(false),
-        getAllProducts(),
       ]);
     })
     .catch(ex => {

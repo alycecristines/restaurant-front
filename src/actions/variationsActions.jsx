@@ -38,10 +38,10 @@ export const variationsSetSearch = value => {
   };
 };
 
-export const getAllVariations = productId => (dispatch, getState) => {
+export const getAllVariations = () => (dispatch, getState) => {
   dispatch(variationsSetIsLoading(true));
 
-  const { description } = getState().variations.variationsSearch;
+  const { description, productId } = getState().variations.variationsSearch;
 
   api
     .get(`/variations?IncludeInactivated=true&Description=${description}&ProductId=${productId}`)
@@ -74,11 +74,13 @@ export const getVariationById = (id, setValues) => dispatch => {
     });
 };
 
-export const addVariation = (description, productId) => dispatch => {
+export const addVariation = values => (dispatch, getState) => {
   dispatch(variationsSetIsLoading(true));
 
+  const { productId } = getState().variations.variationsSearch;
+
   const data = {
-    description: description,
+    description: values.description,
     productId: productId,
   };
 
@@ -90,7 +92,7 @@ export const addVariation = (description, productId) => dispatch => {
         description: 'Adicionado com sucesso.',
       });
 
-      dispatch(getAllVariations(productId));
+      dispatch(getAllVariations());
     })
     .catch(ex => {
       ex && setErrors(ex.errors);
@@ -146,7 +148,7 @@ export const deleteVariationConfirmed = id => dispatch => {
       if (resp.status === 200) {
         swal('Operação realizada com sucesso.', { icon: 'success' });
       }
-      dispatch(getAllVariations(id));
+      dispatch(getAllVariations());
     })
     .catch(ex => {
       notification['error']({

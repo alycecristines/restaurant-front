@@ -6,6 +6,8 @@ const INICIAL_STATE = {
   productCurrentPage: 0,
   productTotalRecords: 0,
   productSearch: { description: '', menuId: '' },
+  productNextStep: false,
+  productDisableFields: false,
 };
 
 export default (state = INICIAL_STATE, action) => {
@@ -20,6 +22,10 @@ export default (state = INICIAL_STATE, action) => {
       return { ...state, productTotalRecords: action.payload };
     case Types.PRODUCTS_SEARCH:
       return { ...state, productSearch: action.payload };
+    case Types.PRODUCTS_NEXT_STEP:
+      return { ...state, productNextStep: action.payload };
+    case Types.PRODUCTS_DISABLE_FIELDS:
+      return { ...state, productDisableFields: action.payload };
     default:
       return state;
   }

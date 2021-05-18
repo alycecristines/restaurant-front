@@ -42,7 +42,7 @@ const VariationsGrid = props => {
 
   useEffect(() => {
     if (props.match.params.id) {
-      dispatch(getAllVariations(props.match.params.id));
+      dispatch(getAllVariations());
     }
   }, []);
 

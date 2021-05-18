@@ -5,7 +5,7 @@ const INICIAL_STATE = {
   variationsRecords: [],
   variationsCurrentPage: 0,
   variationsTotalRecords: 0,
-  variationsSearch: { description: '' },
+  variationsSearch: { description: '', productId: '' },
 };
 
 export default (state = INICIAL_STATE, action) => {

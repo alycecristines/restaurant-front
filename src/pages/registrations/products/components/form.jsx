@@ -41,7 +41,7 @@ const InnerForm = ({
 
     return function cleanup() {
       dispatch([
-        variationsSetSearch({ description: '' }),
+        variationsSetSearch({ description: '', productId: '' }),
         variationsSetRecords([]),
       ]);
     };
@@ -51,7 +51,7 @@ const InnerForm = ({
     if (data.description == '') {
       swal('É necessário informar o nome da variação a ser adicionada', { icon: 'warning' });
     } else {
-      dispatch(addVariation(data.description, productId));
+      dispatch(addVariation(data));
     }
   }
 

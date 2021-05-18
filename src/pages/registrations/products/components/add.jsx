@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-// import AddForm from './addForm';
+import AddForm from './addForm';
 import Header from '../../../../components/theme/header';
 
 const Add = () => (
@@ -14,7 +14,7 @@ const Add = () => (
     <div className="wrapper wrapper-content">
       <div className="row">
         <div className="col-md-12">
-          {/* <AddForm /> */}
+          <AddForm />
         </div>
       </div>
     </div>
