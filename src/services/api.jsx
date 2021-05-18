@@ -5,9 +5,9 @@ const api = create({
   baseURL: 'https://api-restaurant.tk/api',
 });
 
-// api.addRequestTransform(request => {
-//   request.headers['Authorization'] = `Bearer ${localStorage.getItem('@rest:token')}`;
-// });
+api.addRequestTransform(request => {
+  request.headers['Authorization'] = `Bearer ${localStorage.getItem('@rest:token')}`;
+});
 
 api.addResponseTransform(response => {
   if (!response.ok) throw response.data;
