@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import history from '../../../../helpers/history';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllProducts, productsSetSearch } from '../../../../actions/productsActions';
+import { variationsSetSearch } from '../../../../actions/variationsActions';
 
 const GridProducts = ({ title }) => {
   const dispatch = useDispatch();
@@ -30,7 +31,10 @@ const GridProducts = ({ title }) => {
           <Tooltip title="Editar">
             <button
               onClick={() => {
-                dispatch(productsSetSearch({ description: '', menuId: '' }));
+                dispatch([
+                  productsSetSearch({ description: '', menuId: '' }),
+                  variationsSetSearch({ description: '', productId: record.id }),
+                ]);
                 history.push(`/products/edit/${record.id}`);
               }}
               className="btn-icon-edit mr-1">

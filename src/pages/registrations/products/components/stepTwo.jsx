@@ -10,7 +10,7 @@ import Messages from '../../../../helpers/messages';
 import { Container, Div } from './styles';
 import VariationsGrid from './variationsGrid';
 
-function InnerForm({ values, errors, isSubmitting, handleSubmit, handleChange }) {
+function InnerForm({ values, errors, handleSubmit, handleChange }) {
   const { variationsIsLoading } = useSelector(state => state.variations);
 
   return (
