@@ -1,5 +1,6 @@
 import * as Types from '../utils/actionTypes';
 import { notification } from 'antd';
+import api from '../services/api';
 import history from '../helpers/history';
 
 export const loginSetIsLoading = bool => {
@@ -29,17 +30,24 @@ export const logOutUser = () => dispatch => {
 export const loginUser = values => dispatch => {
   dispatch(loginSetIsLoading(true));
 
-  if (values.email === 'admin@admin.com' && values.password === '123') {
-    loadAuthentication(true);
-    dispatch(loginSetIsLogged(true));
-    history.push('/');
-  } else {
-    notification['error']({
-      message: 'Login',
-      description: 'Usuário e/ou senha incorretos.',
-      className: 'notification-error',
-    });
-  }
+  const data = {
+    userName: values.email,
+    password: values.password,
+  };
 
-  dispatch(loginSetIsLoading(false));
+  api
+    .post(`accounts/sign-in`, data)
+    .then(response => {
+      loadAuthentication(response?.data?.data?.token);
+      dispatch([loginSetIsLogged(true), loginSetIsLoading(false)]);
+      history.push('/');
+    })
+    .catch(() => {
+      notification['error']({
+        message: 'Login',
+        description: 'Usuário e/ou senha incorretos.',
+        className: 'notification-error',
+      });
+      dispatch(loginSetIsLoading(false));
+    });
 };

@@ -1568,7 +1568,7 @@ button:focus {
   font-size: 20px;
   border: none;
   background: transparent;
-  color: #f9bf3c;
+  color: #2f4050;
 }
 .btn-icon-delete {
   font-size: 20px;
@@ -1603,7 +1603,7 @@ button:focus {
   color: #0064ffa6;
 }
 .btn-warning.btn-outline {
-  color: #ffbf3c;
+  color: #2f4050;
 }
 .btn-danger.btn-outline {
   color: #ed5565;
@@ -1633,8 +1633,8 @@ button:focus {
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary.active {
-  border-color: #2469bb;
-  background-color: #2469bb;
+  border-color: #2f4050;
+  background-color: #2f4050;
   box-shadow: 0 10px 33px -14px #b7791d;
   color: #ffffff;
 }
@@ -1760,8 +1760,8 @@ fieldset[disabled] .btn-default.active {
 }
 .btn-warning {
   color: #ffffff !important;
-  background-color: #ffbf3c !important;
-  border: 1px solid #ffbf3c !important;
+  background-color: #2f4050 !important;
+  border: 1px solid #2f4050 !important;
   padding: 10px 20px;
   border-radius: 25px;
   transition: all 0.5s;
@@ -1772,7 +1772,7 @@ fieldset[disabled] .btn-default.active {
   color: #ffffff !important;
   border-color: #e2aa37 !important;
   background-color: #e2aa37 !important;
-  box-shadow: 0 10px 33px -14px #ffbf3c !important;
+  box-shadow: 0 10px 33px -14px #2f4050 !important;
 }
 .btn-warning.disabled,
 .btn-warning:disabled {
@@ -2036,12 +2036,12 @@ button.dim:active:before {
 }
 .label-warning,
 .badge-warning {
-  background-color: #ffbf3c;
+  background-color: #2f4050;
   color: #ffffff;
 }
 .label-warning-light,
 .badge-warning-light {
-  background-color: #ffbf3c;
+  background-color: #2f4050;
   color: #ffffff;
 }
 .label-danger,
@@ -2874,7 +2874,7 @@ select.form-control:not([size]):not([multiple]) {
 }
 .has-warning .form-control,
 .has-warning .form-control:focus {
-  border-color: #ffbf3c;
+  border-color: #2f4050;
 }
 .has-error .form-control,
 .has-error .form-control:focus {
@@ -2884,7 +2884,7 @@ select.form-control:not([size]):not([multiple]) {
   color: #4cd964;
 }
 .has-warning .control-label {
-  color: #ffbf3c;
+  color: #2f4050;
 }
 .has-error .control-label {
   color: #d41367;
@@ -5180,8 +5180,8 @@ table.table-mail tr td {
   border-color: #f8ac59;
 }
 .panel-warning > .panel-heading {
-  background-color: #ffbf3c;
-  border-color: #ffbf3c;
+  background-color: #2f4050;
+  border-color: #2f4050;
   color: #ffffff;
 }
 .panel-danger {
@@ -7011,7 +7011,7 @@ body.body-small .vote-icon {
 .sk-spinner-rotating-plane.sk-spinner {
   width: 30px;
   height: 30px;
-  background-color: #ffbf3c;
+  background-color: #2f4050;
   margin: 0 auto;
   -webkit-animation: sk-rotatePlane 1.2s infinite ease-in-out;
   animation: sk-rotatePlane 1.2s infinite ease-in-out;
@@ -7064,7 +7064,7 @@ body.body-small .vote-icon {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background-color: #ffbf3c;
+  background-color: #2f4050;
   opacity: 0.6;
   position: absolute;
   top: 0;
@@ -7118,7 +7118,7 @@ body.body-small .vote-icon {
   font-size: 10px;
 }
 .sk-spinner-wave div {
-  background-color: #ffbf3c;
+  background-color: #2f4050;
   height: 100%;
   width: 6px;
   display: inline-block;
@@ -7182,7 +7182,7 @@ body.body-small .vote-icon {
 }
 .sk-spinner-wandering-cubes .sk-cube1,
 .sk-spinner-wandering-cubes .sk-cube2 {
-  background-color: #ffbf3c;
+  background-color: #2f4050;
   width: 10px;
   height: 10px;
   position: absolute;
@@ -7251,7 +7251,7 @@ body.body-small .vote-icon {
   width: 40px;
   height: 40px;
   margin: 0 auto;
-  background-color: #ffbf3c;
+  background-color: #2f4050;
   border-radius: 100%;
   -webkit-animation: sk-pulseScaleOut 1s infinite ease-in-out;
   animation: sk-pulseScaleOut 1s infinite ease-in-out;
@@ -7303,7 +7303,7 @@ body.body-small .vote-icon {
   display: inline-block;
   position: absolute;
   top: 0;
-  background-color: #ffbf3c;
+  background-color: #2f4050;
   border-radius: 100%;
   -webkit-animation: sk-chasingDotsBounce 2s infinite ease-in-out;
   animation: sk-chasingDotsBounce 2s infinite ease-in-out;
@@ -7366,7 +7366,7 @@ body.body-small .vote-icon {
 .sk-spinner-three-bounce div {
   width: 18px;
   height: 18px;
-  background-color: #ffbf3c;
+  background-color: #2f4050;
   border-radius: 100%;
   display: inline-block;
   -webkit-animation: sk-threeBounceDelay 1.4s infinite ease-in-out;
@@ -7445,7 +7445,7 @@ body.body-small .vote-icon {
   margin: 0 auto;
   width: 20%;
   height: 20%;
-  background-color: #ffbf3c;
+  background-color: #2f4050;
   border-radius: 100%;
   -webkit-animation: sk-circleBounceDelay 1.2s infinite ease-in-out;
   animation: sk-circleBounceDelay 1.2s infinite ease-in-out;
@@ -7608,7 +7608,7 @@ body.body-small .vote-icon {
 .sk-spinner-cube-grid .sk-cube {
   width: 33%;
   height: 33%;
-  background-color: #ffbf3c;
+  background-color: #2f4050;
   float: left;
   -webkit-animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out;
   animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out;
@@ -7682,7 +7682,7 @@ body.body-small .vote-icon {
  *
  */
 .sk-spinner-wordpress.sk-spinner {
-  background-color: #ffbf3c;
+  background-color: #2f4050;
   width: 30px;
   height: 30px;
   border-radius: 30px;
@@ -7759,7 +7759,7 @@ body.body-small .vote-icon {
   margin: 0 auto;
   width: 18%;
   height: 18%;
-  background-color: #ffbf3c;
+  background-color: #2f4050;
   border-radius: 100%;
   -webkit-animation: sk-circleFadeDelay 1.2s infinite ease-in-out;
   animation: sk-circleFadeDelay 1.2s infinite ease-in-out;
@@ -8782,7 +8782,7 @@ body.rtls.top-navigation .footer.fixed {
   margin-right: 0;
 }
 .spin-icon {
-  background: #ffbf3c;
+  background: #2f4050;
   position: absolute;
   padding: 7px 10px 7px 13px;
   border-radius: 20px 0 0 20px;
