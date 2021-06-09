@@ -42,9 +42,8 @@ class Navigation extends Component {
               <MenuItem path="/companies" label="Empresas" />
               <MenuItem path="/products" label="Produtos" />
             </MenuTree>
-            {/* <MenuItem path="/orders" icon="list" label="Pedidos" />
-            <MenuItem path="/reports" icon="pie-chart" label="Relatórios" />
-            <MenuItem path="/users" icon="users" label="Usuários" /> */}
+            <MenuItem path="/orders" icon="list" label="Pedidos" />
+            {/* <MenuItem path="/users" icon="users" label="Usuários" /> */}
           </ul>
         </div>
       </nav>

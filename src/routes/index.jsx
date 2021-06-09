@@ -13,6 +13,7 @@ import CompaniesEdit from '../pages/registrations/companies/components/edit';
 import Products from '../pages/registrations/products';
 import ProductsAdd from '../pages/registrations/products/components/add';
 import ProductsEdit from '../pages/registrations/products/components/edit';
+import Orders from '../pages/orders';
 
 const PrivateRouter = ({ component: Component, ...rest }) => {
   return (
@@ -49,6 +50,7 @@ const Routes = () => (
     <PrivateRouter exact path="/products" component={Products} />
     <PrivateRouter exact path="/products/add" component={ProductsAdd} />
     <PrivateRouter exact path="/products/edit/:id" component={ProductsEdit} />
+    <PrivateRouter exact path="/orders" component={Orders} />
   </Switch>
 );
 
