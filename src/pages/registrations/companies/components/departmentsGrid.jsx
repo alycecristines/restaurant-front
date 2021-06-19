@@ -1,6 +1,6 @@
 /* eslint-disable react/display-name */
 import React, { useEffect } from 'react';
-import { Table, Tooltip } from 'antd';
+import { Table, Tag, Tooltip } from 'antd';
 import { withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteDepartment, getAllDepartments } from '../../../../actions/departmentsActions';
@@ -13,30 +13,16 @@ const DepartmentGrid = props => {
     {
       title: 'id',
       dataIndex: 'id',
+      width: '25%',
     },
     {
       title: 'Nome',
       dataIndex: 'description',
     },
     {
-      title: 'Ação',
-      dataIndex: 'acao',
-      width: '14%',
-      align: 'center',
-      render: (text, record) => {
-        return (
-          <div>
-            <Tooltip title="Excluir">
-              <button
-                type="button"
-                onClick={() => dispatch(deleteDepartment(record.id))}
-                className="btn-icon-delete">
-                <i className="fa fa-close"></i>
-              </button>
-            </Tooltip>
-          </div>
-        );
-      },
+      title: 'Ativo?',
+      dataIndex: 'inactivated',
+      render: text => (text ? <Tag color="red">Não</Tag> : <Tag color="green">Sim</Tag>),
     },
   ];
 
@@ -51,7 +37,6 @@ const DepartmentGrid = props => {
       <div className="panel-body no-padding">
         <Table
           loading={departmentIsLoading}
-          // TODO: Add pagination
           rowKey="id"
           dataSource={departmentRecords}
           columns={departmentColumns}

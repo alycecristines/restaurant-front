@@ -1,6 +1,9 @@
 import * as Types from '../utils/actionTypes';
 import api from '../services/api';
 import { notification } from 'antd';
+import { logOutUser } from './loginActions';
+import moment from 'moment';
+import { adjustInfo } from '../utils/funcUtils';
 
 export const ordersSetIsLoading = bool => {
   return {
@@ -56,11 +59,14 @@ export const getAllOrders = () => (dispatch, getState) => {
 
   const { createdAt, companyId } = getState().orders.ordersSearch;
 
+  const dataParcial = moment().format('YYYY-MM');
+
   api
-    .get(`/orders?IncludePrinted=true&CreatedAt=${createdAt}&CompanyId=${companyId}`)
+    .get(`/orders?IncludePrinted=true&CreatedAt=${dataParcial}-${19}&CompanyId=${companyId}`)
     .then(response => {
       const { data } = response.data;
-      dispatch([ordersSetRecords(data), ordersSetIsLoading(false)]);
+      const orders = adjustInfo(data);
+      dispatch([ordersSetRecords(orders), ordersSetIsLoading(false)]);
     })
     .catch(ex => {
       notification['error']({
@@ -74,13 +80,16 @@ export const getAllOrders = () => (dispatch, getState) => {
 export const getAllOrdersNotPrintedAndSetPrinted = () => (dispatch, getState) => {
   dispatch(ordersSetIsLoading(true));
 
-  const { createdAt, companyId } = getState().orders.ordersSearch;
+  const { companyId } = getState().orders.ordersSearch;
+
+  const dataParcial = moment().format('YYYY-MM');
 
   api
-    .get(`/orders/print?IncludePrinted=true&CreatedAt=${createdAt}&CompanyId=${companyId}`)
+    .get(`/orders/print?IncludePrinted=true&CreatedAt=${dataParcial}-${19}&CompanyId=${companyId}`)
     .then(response => {
       const { data } = response.data;
-      dispatch([ordersSetRecordsNotPrinted(data), ordersSetIsLoading(false)]);
+      const orders = adjustInfo(data);
+      dispatch([ordersSetRecordsNotPrinted(orders), ordersSetIsLoading(false)]);
     })
     .catch(ex => {
       notification['error']({
@@ -91,40 +100,27 @@ export const getAllOrdersNotPrintedAndSetPrinted = () => (dispatch, getState) =>
     });
 };
 
-// export const addOrder = (values, setErrors, setSubmitting) => dispatch => {
-//   dispatch([companiesSetIsLoading(true), setSubmitting(true)]);
+export const addOrder = items => dispatch => {
+  dispatch(ordersSetIsLoading(true));
 
-//   api
-//     .post('/companies', values)
-//     .then(response => {
-//       notification['success']({
-//         message: 'Empresa',
-//         description: 'Adicionada com sucesso.',
-//       });
+  const data = { items };
 
-//       dispatch([
-//         companiesSetRecord(response?.data?.data),
-//         departmentsSetSearch({ description: '', companyId: response?.data?.data?.id }),
-//         employeesSetSearch({
-//           name: '',
-//           email: '',
-//           departmentId: '',
-//           companyId: response?.data?.data?.id,
-//         }),
-//         companiesSetNextStep(true),
-//         companiesIsDisabledFields(true),
-//         setSubmitting(false),
-//         companiesSetIsLoading(false),
-//       ]);
-//     })
-//     .catch(ex => {
-//       ex && setErrors(ex.errors);
+  api
+    .post('/orders', data)
+    .then(response => {
+      notification['success']({
+        message: 'Novo Pedido',
+        description: 'Adicionado com sucesso.',
+      });
 
-//       notification['error']({
-//         message: 'Empresa',
-//         description: 'Houve um erro ao tentar adicionar a empresa.',
-//       });
+      dispatch(logOutUser());
+    })
+    .catch(ex => {
+      notification['error']({
+        message: 'Pedido',
+        description: `${ex.title}`,
+      });
 
-//       dispatch([companiesSetIsLoading(false), setSubmitting(false)]);
-//     });
-// };
+      dispatch(ordersSetIsLoading(false));
+    });
+};

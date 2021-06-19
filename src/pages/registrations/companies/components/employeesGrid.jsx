@@ -1,6 +1,6 @@
 /* eslint-disable react/display-name */
 import React, { useEffect } from 'react';
-import { Table, Tooltip } from 'antd';
+import { Table, Tag, Tooltip } from 'antd';
 import { withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteEmployee, getAllEmployees } from '../../../../actions/employeesActions';
@@ -19,28 +19,17 @@ const EmployeeGrid = props => {
       dataIndex: 'name',
     },
     {
+      title: 'Email',
+      dataIndex: 'email',
+    },
+    {
       title: 'Departamento',
       dataIndex: 'departmentId',
     },
     {
-      title: 'Ação',
-      dataIndex: 'acao',
-      width: '14%',
-      align: 'center',
-      render: (text, record) => {
-        return (
-          <div>
-            <Tooltip title="Excluir">
-              <button
-                type="button"
-                onClick={() => dispatch(deleteEmployee(record.id))}
-                className="btn-icon-delete">
-                <i className="fa fa-close"></i>
-              </button>
-            </Tooltip>
-          </div>
-        );
-      },
+      title: 'Ativo?',
+      dataIndex: 'inactivated',
+      render: text => (text ? <Tag color="red">Não</Tag> : <Tag color="green">Sim</Tag>),
     },
   ];
 
@@ -55,7 +44,6 @@ const EmployeeGrid = props => {
       <div className="panel-body no-padding">
         <Table
           loading={employeeIsLoading}
-          // TODO: Add pagination
           rowKey="id"
           dataSource={employeeRecords}
           columns={employeeColumns}

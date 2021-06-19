@@ -1326,6 +1326,9 @@ body.canvas-menu .nav-header {
 body.mini-navbar #page-wrapper {
   margin: 0 0 0 70px;
 }
+body.mini-navbar #page-unlogged-wrapper {
+  margin: 0 30px 0 30px;
+}
 body.fixed-sidebar.mini-navbar .footer,
 body.canvas-menu.mini-navbar .footer {
   margin: 0 0 0 0 !important;

@@ -1,6 +1,9 @@
 // Login
 export const LOGIN_IS_LOADING = 'LOGIN_IS_LOADING';
 export const LOGIN_SET_LOGGED = 'LOGIN_SET_LOGGED';
+export const LOGIN_EMAIL_USED = 'LOGIN_EMAIL_USED';
+export const LOGIN_TOKEN_USED = 'LOGIN_TOKEN_USED';
+export const LOGIN_USER_TYPE = 'LOGIN_USER_TYPE';
 
 // Companies
 export const COMPANIES_IS_LOADING = 'COMPANIES_IS_LOADING';

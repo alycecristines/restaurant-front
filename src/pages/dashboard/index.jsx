@@ -6,9 +6,7 @@ import Content from '../../components/theme/content';
 import Header from '../../components/theme/header';
 
 const Dashboard = () => {
-  useEffect(() => {
-    // TODO: acionar o get das info da dash
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <Suspense
