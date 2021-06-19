@@ -15,12 +15,29 @@ import { useSelector } from 'react-redux';
 
 const Main = () => {
   const { isLogged } = useSelector(state => state.login);
+  const rota = window.location.pathname;
+
   useEffect(() => {
     $(window).bind('load resize', function () {
       correctHeight();
       detectBody();
     });
   }, []);
+
+  if (rota === '/order-request')
+    return (
+      <div id="wrapper skin-1">
+        <Router history={history}>
+          <div>
+            <Progress />
+            <div id="page-unlogged-wrapper" className="gray-bg">
+              <Routes />
+              <Footer />
+            </div>
+          </div>
+        </Router>
+      </div>
+    );
 
   if (isLogged || !!localStorage.getItem('@rest:token'))
     return (

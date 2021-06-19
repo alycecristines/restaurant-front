@@ -46,27 +46,11 @@ const GridProducts = ({ title }) => {
     },
   ];
 
-  // function onChangePage(page, pageSize) {
-  //   dispatch(getAllProducts(page-1, pageSize));
-  // }
-
-  // function onShowSizeChange(current, size) {
-  //   dispatch(getAllProducts(0, size));
-  // }
-
   return (
     <div className="panel panel-primary">
       <div className="panel-heading">{title}</div>
       <div className="panel-body no-padding">
         <Table
-          // pagination={{
-          //   pageSizeOptions: ['10', '30', '50'],
-          //   showSizeChanger: true,
-          //   onShowSizeChange: onShowSizeChange,
-          //   onChange: onChangePage,
-          //   defaultCurrent: // TODO: adicionar o currentPage do reducer,
-          //   total: // TODO: adicionar o totalRecords do reducer,
-          // }}
           loading={productIsLoading}
           rowKey="id"
           dataSource={productRecords}

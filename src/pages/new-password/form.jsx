@@ -2,10 +2,13 @@ import React from 'react';
 import { Button } from 'antd';
 import { withFormik } from 'formik';
 import * as Yup from 'yup';
+import { connect } from 'react-redux';
 
 import { Form, Row } from '../../components/bootstrap';
 import { InputPassword } from '../../components/form';
 import Messages from '../../helpers/messages';
+
+import { defineNewPassword } from '../../actions/loginActions';
 
 const InnerForm = ({ values, errors, isSubmitting, handleSubmit, handleChange }) => {
   return (
@@ -53,10 +56,13 @@ const LoginForm = withFormik({
       .oneOf([Yup.ref('password'), null], 'As senhas digitadas não são iguais.')
       .required(Messages.REQUIRED),
   }),
-  // handleSubmit(values, { props, setSubmitting }) {
-  handleSubmit() {
-    //TODO: Acionar o salvar nova senha da api
+  handleSubmit(values, { props }) {
+    props.defineNewPassword(values);
   },
 })(InnerForm);
 
-export default LoginForm;
+const mapDispatchToProps = {
+  defineNewPassword,
+};
+
+export default connect(null, mapDispatchToProps)(LoginForm);

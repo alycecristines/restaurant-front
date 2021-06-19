@@ -13,14 +13,31 @@ import CompaniesEdit from '../pages/registrations/companies/components/edit';
 import Products from '../pages/registrations/products';
 import ProductsAdd from '../pages/registrations/products/components/add';
 import ProductsEdit from '../pages/registrations/products/components/edit';
+import Orders from '../pages/orders';
+import OrdersRequests from '../pages/orders-request';
+import NaoAutorizado from '../pages/naoautorizado';
 
-const PrivateRouter = ({ component: Component, ...rest }) => {
+const PrivateRouter = ({ component: Component, tipo, ...rest }) => {
+  const verificador = tipo.filter(item => {
+    if (item === localStorage.getItem('@rest:tipo')) return true;
+  });
+
   return (
     <Route
       {...rest}
       render={props =>
         !!localStorage.getItem('@rest:token') ? (
-          <Component {...props} />
+          verificador.length === 1 ? (
+            <Component {...props} />
+          ) : (
+            <Redirect
+              to={{
+                exact: true,
+                pathname: '/nao-autorizado',
+                state: { from: props.location },
+              }}
+            />
+          )
         ) : (
           <Redirect
             to={{
@@ -37,18 +54,57 @@ const PrivateRouter = ({ component: Component, ...rest }) => {
 
 const Routes = () => (
   <Switch>
-    <Route exact path="/login" component={Login} />
-    <Route exact path="/reset-password" component={ResetPassword} />
-    <Route exact path="/validate-code" component={ValidateCode} />
-    <Route exact path="/new-password" component={NewPassword} />
-    <Route exact path="/first-access" component={FirstAccess} />
-    <PrivateRouter exact path="/" component={Dashboard} />
-    <PrivateRouter exact path="/companies" component={Companies} />
-    <PrivateRouter exact path="/companies/add" component={CompaniesAdd} />
-    <PrivateRouter exact path="/companies/edit/:id" component={CompaniesEdit} />
-    <PrivateRouter exact path="/products" component={Products} />
-    <PrivateRouter exact path="/products/add" component={ProductsAdd} />
-    <PrivateRouter exact path="/products/edit/:id" component={ProductsEdit} />
+    <Route exact path="/login" component={Login} tipo={['Administrator', 'Employee']} />
+    <Route
+      exact
+      path="/reset-password"
+      component={ResetPassword}
+      tipo={['Administrator', 'Employee']}
+    />
+    <Route
+      exact
+      path="/nao-autorizado"
+      component={NaoAutorizado}
+      tipo={['Administrator', 'Employee']}
+    />
+
+    <Route
+      exact
+      path="/validate-code"
+      component={ValidateCode}
+      tipo={['Administrator', 'Employee']}
+    />
+    <Route
+      exact
+      path="/new-password"
+      component={NewPassword}
+      tipo={['Administrator', 'Employee']}
+    />
+    <Route
+      exact
+      path="/first-access"
+      component={FirstAccess}
+      tipo={['Administrator', 'Employee']}
+    />
+    <PrivateRouter exact path="/companies" component={Companies} tipo={['Administrator']} />
+    <PrivateRouter exact path="/companies/add" component={CompaniesAdd} tipo={['Administrator']} />
+    <PrivateRouter
+      exact
+      path="/companies/edit/:id"
+      component={CompaniesEdit}
+      tipo={['Administrator']}
+    />
+    <PrivateRouter exact path="/products" component={Products} tipo={['Administrator']} />
+    <PrivateRouter exact path="/products/add" component={ProductsAdd} tipo={['Administrator']} />
+    <PrivateRouter
+      exact
+      path="/products/edit/:id"
+      component={ProductsEdit}
+      tipo={['Administrator']}
+    />
+    <PrivateRouter exact path="/orders" component={Orders} tipo={['Administrator']} />
+    <PrivateRouter exact path="/" component={Orders} tipo={['Administrator']} />
+    <PrivateRouter exact path="/order-request" component={OrdersRequests} tipo={['Employee']} />
   </Switch>
 );
 

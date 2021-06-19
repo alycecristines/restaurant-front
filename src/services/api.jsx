@@ -1,8 +1,7 @@
 import { create } from 'apisauce';
 
 const api = create({
-  // baseURL: 'http://localhost:5001/',
-  baseURL: 'https://api-restaurant.tk/api',
+  baseURL: 'https://142.93.196.10/api',
 });
 
 api.addRequestTransform(request => {

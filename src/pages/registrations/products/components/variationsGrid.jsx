@@ -51,7 +51,6 @@ const VariationsGrid = props => {
       <div className="panel-body no-padding">
         <Table
           loading={variationsIsLoading}
-          // TODO: Add pagination
           rowKey="id"
           dataSource={variationsRecords}
           columns={variationsColumns}

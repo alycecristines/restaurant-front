@@ -2,10 +2,13 @@ import React from 'react';
 import { Button } from 'antd';
 import { withFormik } from 'formik';
 import * as Yup from 'yup';
+import { connect } from 'react-redux';
 
 import { Form, Row } from '../../components/bootstrap';
 import { InputText } from '../../components/form';
 import Messages from '../../helpers/messages';
+
+import { validateCode } from '../../actions/loginActions';
 
 const InnerForm = ({ values, errors, isSubmitting, handleSubmit, handleChange }) => {
   return (
@@ -38,10 +41,13 @@ const LoginForm = withFormik({
   validationSchema: Yup.object().shape({
     validationCode: Yup.string().required(Messages.REQUIRED),
   }),
-  // handleSubmit(values, { props, setSubmitting }) {
-  handleSubmit() {
-    //TODO: Acionar o codigo de validacao da api
+  handleSubmit(values, { props }) {
+    props.validateCode(values);
   },
 })(InnerForm);
 
-export default LoginForm;
+const mapDispatchToProps = {
+  validateCode,
+};
+
+export default connect(null, mapDispatchToProps)(LoginForm);
