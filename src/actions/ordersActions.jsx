@@ -59,10 +59,10 @@ export const getAllOrders = () => (dispatch, getState) => {
 
   const { createdAt, companyId } = getState().orders.ordersSearch;
 
-  const dataParcial = moment().format('YYYY-MM');
+  const date = moment().format('YYYY-MM-DD');
 
   api
-    .get(`/orders?IncludePrinted=true&CreatedAt=${dataParcial}-${19}&CompanyId=${companyId}`)
+    .get(`/orders?IncludePrinted=true&CreatedAt=${date}&CompanyId=${companyId}`)
     .then(response => {
       const { data } = response.data;
       const orders = adjustInfo(data);
@@ -82,10 +82,10 @@ export const getAllOrdersNotPrintedAndSetPrinted = () => (dispatch, getState) =>
 
   const { companyId } = getState().orders.ordersSearch;
 
-  const dataParcial = moment().format('YYYY-MM');
+  const date = moment().format('YYYY-MM-DD');
 
   api
-    .get(`/orders/print?IncludePrinted=true&CreatedAt=${dataParcial}-${19}&CompanyId=${companyId}`)
+    .get(`/orders/print?IncludePrinted=true&CreatedAt=${date}&CompanyId=${companyId}`)
     .then(response => {
       const { data } = response.data;
       const orders = adjustInfo(data);
