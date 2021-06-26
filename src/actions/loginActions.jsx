@@ -72,7 +72,7 @@ export const loginUser = values => dispatch => {
     .catch(ex => {
       notification['error']({
         message: 'Login',
-        description: `${ex.title}`,
+        description: `${ex?.title || 'Ops, houve um problema na comunicação com o servidor'}`,
         className: 'notification-error',
       });
       dispatch(loginSetIsLoading(false));
@@ -148,7 +148,7 @@ export const defineNewPassword = values => (dispatch, getState) => {
     .catch(ex => {
       notification['error']({
         message: 'Login',
-        description: `${ex.title}`,
+        description: `${ex?.title || 'Ops, houve um problema na comunicação com o servidor'}`,
         className: 'notification-error',
       });
       dispatch(loginSetIsLoading(false));

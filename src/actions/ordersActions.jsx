@@ -118,7 +118,7 @@ export const addOrder = items => dispatch => {
     .catch(ex => {
       notification['error']({
         message: 'Pedido',
-        description: `${ex.title}`,
+        description: `${ex?.title || 'Ops, houve um problema na comunicação com o servidor'}`,
       });
 
       dispatch(ordersSetIsLoading(false));
